@@ -1,0 +1,8 @@
+# Documentos internos: ficam no repositorio, mas nao vao para o ar.
+# Na Hostinger quem bloqueava isso era o .htaccess, que a Vercel ignora.
+LEIA-ME-HOSPEDAGEM.txt
+RELATORIO-TECNICO.txt
+
+# Configuracao de servidor Apache: sem efeito na Vercel, mantida no
+# repositorio caso o site volte para uma hospedagem compartilhada.
+.htaccess

@@ -1,0 +1,9 @@
+# Ecovila Mundo Verde — https://www.ecovilamundoverde.com.br
+
+User-agent: *
+Allow: /
+Disallow: /404.html
+Disallow: /LEIA-ME-HOSPEDAGEM.txt
+Disallow: /RELATORIO-TECNICO.txt
+
+Sitemap: https://www.ecovilamundoverde.com.br/sitemap.xml

@@ -1,0 +1,167 @@
+================================================================================
+ECOVILA MUNDO VERDE - PACOTE PARA HOSPEDAGEM
+Dominio de producao: https://www.ecovilamundoverde.com.br
+Tecnologia: site estatico (HTML, CSS e JavaScript). Nao exige PHP nem banco.
+Ultima configuracao: 14/10/2026
+================================================================================
+
+
+--------------------------------------------------------------------------------
+1. ANTES DE SUBIR - DOIS CAMPOS A PREENCHER
+--------------------------------------------------------------------------------
+
+O site ja funciona sem isso, mas duas funcoes ficam desligadas ate serem
+preenchidas. Abra o arquivo script.js e edite SOMENTE as primeiras linhas:
+
+    const SITE = {
+      whatsapp: '',
+      web3forms: '',
+      email: 'contato@ecovilamundoverde.com.br'
+    };
+
+  whatsapp
+    Numero com codigo do pais e DDD, apenas digitos.
+    Exemplo: whatsapp: '5554999887766'
+    Enquanto estiver vazio, os botoes de WhatsApp ficam invisiveis no site
+    inteiro (botao flutuante, rodape e pagina de contato). Ao preencher,
+    os tres aparecem sozinhos. Nao e preciso mexer em mais nada.
+
+  web3forms
+    Chave gratuita que faz o formulario enviar de verdade.
+    Como obter, leva 1 minuto:
+      1. Acesse https://web3forms.com
+      2. Digite contato@ecovilamundoverde.com.br e clique em criar chave
+      3. Confirme o e-mail que chegara nessa caixa
+      4. Copie a chave recebida e cole entre as aspas
+    Plano gratuito: 250 envios por mes.
+    Enquanto estiver vazia, o formulario funciona no modo antigo: abre o
+    aplicativo de e-mail do visitante com a mensagem ja preenchida.
+    RECOMENDADO preencher: no celular, boa parte dos visitantes nao tem
+    aplicativo de e-mail configurado e acaba desistindo do contato.
+
+
+--------------------------------------------------------------------------------
+2. PUBLICACAO NA HOSTINGER
+--------------------------------------------------------------------------------
+
+  1. Abra o Gerenciador de Arquivos da hospedagem.
+  2. Entre na pasta public_html do dominio.
+  3. Envie TODO o conteudo deste pacote para dentro de public_html.
+     Nao crie uma subpasta: index.html precisa ficar direto em public_html.
+  4. Confira que estes arquivos estao na raiz de public_html:
+         index.html        .htaccess        favicon.ico
+         apple-touch-icon.png               manifest.webmanifest
+         robots.txt        sitemap.xml      404.html
+     e que a pasta assets/ foi inteira.
+  5. Ative o certificado SSL no painel (SSL gratuito Let's Encrypt).
+     IMPORTANTE: ative o SSL ANTES de testar. O .htaccess forca HTTPS;
+     sem certificado ativo o navegador mostrara aviso de seguranca.
+  6. Aguarde a propagacao (geralmente minutos, ate 24h em DNS novo).
+  7. Teste https://www.ecovilamundoverde.com.br
+
+  Observacao sobre arquivos ocultos:
+  o .htaccess comeca com ponto e pode nao aparecer na listagem. No
+  Gerenciador de Arquivos da Hostinger, ative "Mostrar arquivos ocultos"
+  nas configuracoes para confirmar que ele subiu.
+
+  Nao e necessario enviar:
+      LEIA-ME-HOSPEDAGEM.txt  e  RELATORIO-TECNICO.txt
+  Sao documentos internos. Se forem enviados por engano, o .htaccess ja
+  bloqueia o acesso publico a eles.
+
+
+--------------------------------------------------------------------------------
+3. DEPOIS DE PUBLICAR - CONFERENCIA RAPIDA
+--------------------------------------------------------------------------------
+
+  [ ] https://www.ecovilamundoverde.com.br abre com cadeado de seguranca
+  [ ] http://ecovilamundoverde.com.br redireciona para a versao https com www
+  [ ] As 6 paginas do menu abrem e o menu funciona no celular
+  [ ] O video da capa roda
+  [ ] A pagina Lotes mostra os 18 cartoes e abre a ficha ao clicar
+  [ ] A galeria carrega fotos e videos
+  [ ] O formulario de contato envia e a mensagem chega na caixa de entrada
+  [ ] O icone do site aparece na aba do navegador
+  [ ] Um endereco inexistente (ex: /teste) cai na pagina 404 personalizada
+
+
+--------------------------------------------------------------------------------
+4. GOOGLE - INDEXACAO
+--------------------------------------------------------------------------------
+
+  1. Acesse https://search.google.com/search-console
+  2. Adicione a propriedade www.ecovilamundoverde.com.br
+  3. Valide a posse (a Hostinger permite validacao por DNS)
+  4. Em Sitemaps, cadastre:  sitemap.xml
+  5. Em Inspecao de URL, peca a indexacao da pagina inicial
+
+  O arquivo robots.txt ja libera a leitura do site e aponta o sitemap.
+
+
+--------------------------------------------------------------------------------
+5. O QUE ESTA CONFIGURADO NO PACOTE
+--------------------------------------------------------------------------------
+
+  .htaccess
+      Redirecionamento permanente para HTTPS e para o dominio com www.
+      Remocao de /index.html da URL (evita conteudo duplicado no Google).
+      Cache: imagens e videos por 1 ano, CSS e JS por 7 dias,
+      paginas HTML sempre revalidadas.
+      Compressao GZIP e Brotli.
+      Cabecalhos de seguranca, incluindo HSTS e Content-Security-Policy.
+      Bloqueio de listagem de pastas e de arquivos internos.
+      Paginas de erro 403 e 404 personalizadas.
+
+  Icones
+      favicon.ico (16/32/48), apple-touch-icon.png (180),
+      assets/icon-192.png, assets/icon-512.png e
+      assets/icon-maskable-512.png, todos gerados da logo oficial.
+
+  manifest.webmanifest
+      Permite "adicionar a tela inicial" no celular com icone e cores certas.
+
+  SEO
+      Titulo e descricao proprios por pagina, URLs canonicas,
+      Open Graph e Twitter Cards, dados estruturados Schema.org,
+      robots.txt, sitemap.xml e pagina 404 marcada como nao indexavel.
+
+  Desempenho
+      Video da capa reduzido de 13,1 MB para 6,8 MB sem perda visivel.
+      O segundo video da capa so baixa quando a cena aparece.
+      Todas as imagens abaixo da dobra com carregamento sob demanda.
+      JavaScript com defer.
+
+  Acessibilidade
+      Contorno visivel na navegacao por teclado e respeito a preferencia
+      de "reduzir animacoes" do sistema operacional.
+
+
+--------------------------------------------------------------------------------
+6. ATENCAO AO INSTALAR FERRAMENTAS EXTERNAS
+--------------------------------------------------------------------------------
+
+O .htaccess traz uma Content-Security-Policy que, por seguranca, so autoriza
+o proprio site, as fontes do Google e o envio do formulario (Web3Forms).
+
+Se um dia for instalado Google Analytics, Google Tag Manager, Meta Pixel,
+chat online ou mapa incorporado, o recurso sera BLOQUEADO ate que o
+dominio dele seja incluido na linha Content-Security-Policy do .htaccess.
+
+Nao e um defeito: e a protecao funcionando. Quem instalar a ferramenta
+precisa ajustar essa linha.
+
+
+--------------------------------------------------------------------------------
+7. PENDENCIAS DE CONTEUDO (nao impedem a publicacao)
+--------------------------------------------------------------------------------
+
+  - Numero de WhatsApp (item 1 deste documento).
+  - Chave do Web3Forms (item 1 deste documento).
+  - Enderecos oficiais de YouTube, Facebook, Instagram e Pinterest.
+    O bloco de redes sociais foi RETIRADO do rodape porque exibia o aviso
+    "Links oficiais em configuracao" para o visitante. Em seu lugar entrou
+    um bloco CONTATO. Quando os perfis existirem, eles podem voltar.
+  - Medidas, areas e topografia finais dos 18 lotes.
+  - Modelos e videos individuais de construcao.
+
+================================================================================

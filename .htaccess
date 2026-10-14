@@ -1,0 +1,135 @@
+# ============================================================================
+# ECOVILA MUNDO VERDE — configuração de servidor (Apache / LiteSpeed)
+# Domínio de produção: https://www.ecovilamundoverde.com.br
+# ============================================================================
+
+DirectoryIndex index.html
+Options -Indexes
+AddDefaultCharset UTF-8
+
+# ---------------------------------------------------------------- tipos MIME
+<IfModule mod_mime.c>
+  AddType application/manifest+json       .webmanifest
+  AddType image/x-icon                    .ico
+  AddType image/svg+xml                   .svg
+  AddType image/webp                      .webp
+  AddType video/mp4                       .mp4
+  AddType font/woff2                      .woff2
+  AddCharset UTF-8 .html .css .js .json .xml .txt .webmanifest
+</IfModule>
+
+# ------------------------------------------- HTTPS + domínio canônico (www)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Força HTTPS (cobre também servidores atrás de proxy/balanceador)
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://www.ecovilamundoverde.com.br%{REQUEST_URI} [R=301,L]
+
+  # Força o domínio com www
+  RewriteCond %{HTTP_HOST} !^www\.ecovilamundoverde\.com\.br$ [NC]
+  RewriteRule ^ https://www.ecovilamundoverde.com.br%{REQUEST_URI} [R=301,L]
+
+  # Remove index.html da URL (evita conteúdo duplicado para o Google)
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /%1 [R=301,L]
+</IfModule>
+
+# ------------------------------------------------------------------- cache
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                          "access plus 1 month"
+  ExpiresByType text/html                 "access plus 1 hour"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType text/javascript           "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType image/x-icon              "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+  ExpiresByType video/mp4                 "access plus 6 months"
+  ExpiresByType application/manifest+json "access plus 1 week"
+  ExpiresByType application/xml           "access plus 1 hour"
+  ExpiresByType text/plain                "access plus 1 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # HTML sempre revalidado: o conteúdo do site pode mudar a qualquer momento
+  <FilesMatch "\.(html|xml|txt|webmanifest)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  # Mídia e estáticos: cache longo
+  <FilesMatch "\.(jpg|jpeg|png|webp|svg|ico|mp4|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # CSS e JS: cache de 7 dias (não há versionamento no nome do arquivo)
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
+
+# -------------------------------------------------------------- compressão
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript text/javascript
+  AddOutputFilterByType DEFLATE application/json application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE application/manifest+json
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff2
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript text/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/json application/xml
+  AddOutputFilterByType BROTLI_COMPRESS application/manifest+json image/svg+xml
+</IfModule>
+
+# ------------------------------------------------- cabeçalhos de segurança
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+
+  # HSTS: só vale em HTTPS. Ative o SSL antes de publicar este arquivo.
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+
+  # Fontes do Google e envio do formulário (Web3Forms) estão liberados abaixo.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
+</IfModule>
+
+# ------------------------------------------------------- proteção de arquivos
+<FilesMatch "^\.|\.(txt|md|bak|log|ini|sh|py)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# robots.txt precisa continuar público
+<Files "robots.txt">
+  <IfModule mod_authz_core.c>
+    Require all granted
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Allow from all
+  </IfModule>
+</Files>
+
+# --------------------------------------------------------- páginas de erro
+ErrorDocument 403 /404.html
+ErrorDocument 404 /404.html

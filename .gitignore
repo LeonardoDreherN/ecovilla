@@ -1,0 +1,22 @@
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Vercel
+.vercel/
+
+# Build e dependencias (o site e estatico, nao deve haver nenhum)
+node_modules/
+dist/
+build/
+
+# Arquivos temporarios e copias de seguranca
+*.bak
+*.tmp
+*.log

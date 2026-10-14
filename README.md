@@ -1,0 +1,123 @@
+# Ecovila Mundo Verde
+
+Site institucional da Ecovila Mundo Verde — Fontoura Xavier, Rio Grande do Sul.
+
+Site estático em HTML, CSS e JavaScript. Sem build, sem dependências, sem
+framework: o que está no repositório é exatamente o que vai para o ar.
+
+**Domínio de produção:** https://www.ecovilamundoverde.com.br
+
+---
+
+## Dois campos a preencher
+
+O site funciona sem isso, mas duas funções ficam desligadas até serem
+preenchidas. Tudo fica nas primeiras linhas de [`script.js`](script.js):
+
+```js
+const SITE = {
+  whatsapp: '',   // ex.: '5554999887766' — só dígitos, com país e DDD
+  web3forms: '',  // chave gratuita de https://web3forms.com
+  email: 'contato@ecovilamundoverde.com.br'
+};
+```
+
+| Campo | Vazio | Preenchido |
+|---|---|---|
+| `whatsapp` | Os botões de WhatsApp ficam ocultos no site inteiro | Botão flutuante, rodapé e página de contato aparecem sozinhos |
+| `web3forms` | O formulário abre o aplicativo de e-mail do visitante | O formulário envia de verdade, sem sair da página |
+
+Para obter a chave do Web3Forms: acesse web3forms.com, informe
+`contato@ecovilamundoverde.com.br`, confirme o e-mail e cole a chave recebida.
+O plano gratuito cobre 250 envios por mês.
+
+---
+
+## Estrutura
+
+```
+index.html                 Página inicial
+a-ecovila.html             O projeto
+lotes.html                 Os 18 lotes (os cartões são gerados em script.js)
+estrutura.html             Lazer, esporte e implantação
+galeria.html               Fotos e vídeos
+contato.html               Formulário e canais de contato
+politica-de-privacidade.html
+termos-de-uso.html
+404.html                   Página de erro
+
+styles.css                 Folha única, organizada em camadas sucessivas
+script.js                  Configuração, menu, lotes, formulário e capa
+assets/                    Fotos, vídeos e ícones
+
+vercel.json                Redirecionamento, cache, CSP e cabeçalhos
+.vercelignore              O que não vai para o ar
+.htaccess                  Equivalente para Apache — sem efeito na Vercel
+sitemap.xml  robots.txt  manifest.webmanifest
+```
+
+### Sobre o `styles.css`
+
+O arquivo cresce por camadas anexadas ao final, cada uma com um comentário
+dizendo o que resolve. Para alterar algo, é mais seguro anexar uma camada nova
+do que editar regras antigas no meio do arquivo — as últimas declarações
+prevalecem sobre as anteriores de mesma especificidade.
+
+A camada `REDESIGN 2026` define o sistema visual atual: serifa leve em caixa
+alta com entreletras positiva, paleta quase monocromática e o laranja da
+logomarca reduzido a detalhe.
+
+---
+
+## Hospedagem
+
+O repositório está preparado para a **Vercel**. Não há comando de build: a
+Vercel publica os arquivos como estão.
+
+O `vercel.json` cuida de:
+
+- Redirecionamento permanente do domínio sem `www` para o domínio com `www`
+- Cache longo para imagens, vídeos e ícones; curto para CSS e JS; HTML sempre revalidado
+- Cabeçalhos de segurança, incluindo HSTS e Content-Security-Policy
+- Tipo correto para o `manifest.webmanifest`
+
+A página `404.html` é usada automaticamente pela Vercel.
+
+### Atenção ao instalar ferramentas externas
+
+A Content-Security-Policy autoriza apenas o próprio site, as fontes do Google e
+o envio do formulário via Web3Forms.
+
+Google Analytics, Tag Manager, Meta Pixel, chat ou mapa incorporado serão
+**bloqueados** até que o domínio correspondente seja incluído na linha
+`Content-Security-Policy` do `vercel.json`. Não é defeito: é a proteção
+funcionando.
+
+### Se o site voltar para hospedagem Apache
+
+O `.htaccess` na raiz tem a configuração equivalente e continua válido. A
+Vercel o ignora; o `.vercelignore` impede que ele seja publicado.
+
+---
+
+## Desenvolvimento local
+
+Não abra os arquivos com duplo clique: o protocolo `file://` quebra os caminhos
+absolutos e o `manifest.webmanifest`. Suba um servidor na pasta do projeto:
+
+```bash
+python -m http.server 8777
+# depois acesse http://127.0.0.1:8777
+```
+
+---
+
+## Pendências de conteúdo
+
+- Número de WhatsApp e chave do Web3Forms (ver acima)
+- Endereços oficiais de YouTube, Facebook, Instagram e Pinterest — o bloco de
+  redes sociais foi retirado do rodapé porque exibia ao visitante o aviso
+  "Links oficiais em configuração"
+- Medidas, áreas e topografia finais dos 18 lotes — hoje aparecem na ficha em
+  estilo provisório, para não serem lidas como dado final
+- Modelos e vídeos individuais de construção

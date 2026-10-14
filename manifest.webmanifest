@@ -1,0 +1,20 @@
+{
+  "name": "Ecovila Mundo Verde",
+  "short_name": "Mundo Verde",
+  "description": "Natureza, lago, riachos e apenas 18 lotes em Fontoura Xavier, RS.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fbfcf9",
+  "theme_color": "#123a33",
+  "categories": ["lifestyle", "business"],
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

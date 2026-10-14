@@ -1,0 +1,296 @@
+================================================================================
+ECOVILA MUNDO VERDE - RELATORIO TECNICO DE ENTREGA
+Revisao de conteudo: 12/10/2026
+Configuracao para publicacao: 14/10/2026
+================================================================================
+
+
+ESCOPO VALIDADO
+- 8 paginas institucionais e comerciais.
+- Navegacao interna e referencias de arquivos locais.
+- Layout responsivo para computador, tablet e celular.
+- Menu movel e interacao das fichas dos 18 lotes.
+- Formulario de contato com envio real.
+- Galeria com fotos e videos.
+- Politicas de Privacidade e Termos de Uso.
+
+
+--------------------------------------------------------------------------------
+CONFIGURACAO APLICADA EM 14/10/2026
+--------------------------------------------------------------------------------
+
+IDENTIDADE VISUAL NO NAVEGADOR
+- Substituido o icone provisorio (um desenho generico embutido no codigo)
+  pela logomarca oficial.
+- Gerados a partir de assets/logo.png:
+    favicon.ico             16, 32 e 48 pixels
+    apple-touch-icon.png    180 pixels, para iPhone e iPad
+    assets/icon-192.png     192 pixels
+    assets/icon-512.png     512 pixels
+    assets/icon-maskable-512.png   512 pixels, formato adaptavel Android
+- manifest.webmanifest corrigido: declarava 512x512 para um arquivo de
+  1113x1241 e nao estava referenciado em nenhuma pagina. Agora esta
+  vinculado nas 8 paginas e na pagina 404.
+
+FORMULARIO DE CONTATO
+- Migrado de mailto para envio real via Web3Forms, sem necessidade de PHP.
+- Envio assincrono: o visitante permanece na pagina e recebe confirmacao.
+- Mensagens de estado para envio em andamento, sucesso e falha.
+- Campo-armadilha anti-spam invisivel ao visitante.
+- Aviso de tratamento de dados com link para a Politica de Privacidade.
+- Retorno automatico ao modo antigo (abrir aplicativo de e-mail) enquanto
+  a chave de acesso nao for preenchida, garantindo que o formulario nunca
+  fique sem funcionar.
+
+WHATSAPP
+- Canal adicionado em tres pontos: botao flutuante, rodape e pagina de
+  contato.
+- Controlado por um unico campo em script.js. Enquanto o numero nao for
+  informado, os tres pontos permanecem ocultos, sem deixar links mortos
+  ou numeros de exemplo no ar.
+
+RODAPE
+- Removido o bloco de redes sociais, que exibia quatro itens sem link
+  acompanhados do aviso "Links oficiais em configuracao" - texto de
+  bastidor visivel ao visitante.
+- Em seu lugar entrou um bloco CONTATO com e-mail, WhatsApp e
+  agendamento de visita.
+
+SERVIDOR (.htaccess)
+- Redirecionamento HTTPS reescrito para funcionar tambem atras de proxy
+  ou balanceador, situacao comum em hospedagem compartilhada.
+- Redirecionamento de dominio separado do de protocolo, evitando o
+  encadeamento de dois redirecionamentos na mesma requisicao.
+- Adicionada remocao de /index.html da URL, que gerava duas URLs para a
+  pagina inicial aos olhos do Google.
+- Tipos MIME declarados para .webmanifest, .ico, .svg, .webp, .mp4 e
+  .woff2, que varios servidores nao reconhecem por padrao.
+- Politica de cache revista: HTML sempre revalidado, CSS e JS por 7 dias,
+  midia por 1 ano. Antes, CSS e JS tinham cache de 1 mes sem
+  versionamento no nome do arquivo, o que faria atualizacoes do site
+  demorarem a aparecer para quem ja havia visitado.
+- Compressao Brotli adicionada a GZIP.
+- Cabecalhos de seguranca ampliados: HSTS, Content-Security-Policy,
+  Cross-Origin-Opener-Policy e X-Permitted-Cross-Domain-Policies.
+- Bloqueio de acesso publico a arquivos internos (.txt, .md, .bak, .log,
+  .ini, .sh, .py), com excecao explicita para robots.txt.
+- ErrorDocument 403 alem do 404.
+
+DESEMPENHO
+- Video da capa: 13,07 MB para 6,79 MB (reducao de 48%), de 1920x1080
+  para 1280x720. Comparacao quadro a quadro nao mostrou diferenca
+  perceptivel, ja que o video fica sob um gradiente escuro. Esse video
+  roda automaticamente a cada visita a pagina inicial, entao a economia
+  incide sobre todos os acessos.
+- Segundo video da capa marcado para nao baixar no carregamento: so e
+  buscado quando a cena correspondente aparece.
+- Carregamento sob demanda aplicado a 51 imagens abaixo da dobra,
+  sendo 32 somente na galeria, que antes baixava todas de uma vez.
+- Videos da galeria mantidos: o reteste de compressao aumentou o
+  tamanho do arquivo, indicando que ja estavam otimizados.
+
+ACESSIBILIDADE
+- Contorno de foco visivel para navegacao por teclado em links, botoes e
+  campos de formulario.
+- Respeito a preferencia de sistema "reduzir animacoes".
+- Pagina 404 ampliada com texto de orientacao e atalhos para as paginas
+  principais.
+
+SEO TECNICO
+- Titulos e descricoes individuais.
+- URLs canonicas para www.ecovilamundoverde.com.br.
+- Open Graph e Twitter Cards, agora com largura, altura e tipo da imagem
+  de compartilhamento declarados.
+- Dados estruturados Schema.org para organizacao, local e website.
+- robots.txt com exclusao da pagina 404 e dos documentos internos.
+- sitemap.xml com data de modificacao atualizada.
+- Hierarquia de titulos e textos alternativos nas imagens.
+- Pagina 404 configurada para nao indexacao.
+
+
+--------------------------------------------------------------------------------
+TESTES REALIZADOS EM 14/10/2026
+--------------------------------------------------------------------------------
+
+Executados em servidor local com navegador Chromium, com a
+Content-Security-Policy de producao aplicada:
+
+- 9 paginas carregadas (as 8 principais mais a 404): nenhum erro de
+  JavaScript, nenhum erro de console, nenhuma requisicao falha e nenhuma
+  imagem quebrada.
+- Content-Security-Policy: nao bloqueia as fontes do Google nem os dados
+  estruturados. Validada antes da publicacao justamente por ser a
+  configuracao com maior risco de quebrar o site em producao.
+- Fontes Manrope e DM Sans: carregamento confirmado.
+- Geracao dos 18 cartoes de lote: confirmada.
+- Elementos de WhatsApp sem numero configurado: confirmados como
+  invisiveis na tela, nao apenas marcados como ocultos no codigo.
+- Sintaxe de script.js, styles.css, manifest.webmanifest e sitemap.xml:
+  validadas.
+- Conferencia visual em 1366x900 e em 390x844 (celular): botoes
+  flutuantes sem sobreposicao, rodape e formulario corretos.
+- 19 enderecos testados (paginas, icones, manifest, robots, sitemap,
+  folha de estilo e script): todos responderam com sucesso.
+- Referencias a arquivos locais: nenhuma quebrada.
+- Conteudo antigo de 15 lotes e 10 hectares: nao encontrado.
+
+
+--------------------------------------------------------------------------------
+REDESIGN VISUAL - 14/10/2026
+--------------------------------------------------------------------------------
+
+Referencias adotadas: Capella Ubud (capellahotels.com) e Koto (koto.co.uk).
+As duas foram abertas em navegador e tiveram o sistema de design extraido.
+Apesar de segmentos diferentes, convergem na mesma formula, que era o oposto
+do que o site praticava:
+
+                        REFERENCIAS           ECOVILA ANTES
+  Titulos               caixa alta, peso 300  caixa baixa, peso 800
+  Entreletras           +2,5 a +5,6 px        -0,045 em (negativa)
+  Paleta                quase monocromatica   laranja forte dominante
+  Fotografia            limpa                 gradiente sobre metade
+  Botoes                link sublinhado       pilula laranja peso 900
+
+TIPOGRAFIA
+- Fonte de titulo trocada de Manrope para Cormorant Garamond Light, a
+  equivalente mais proxima da Goudy Light usada pelo Capella.
+- Titulos em caixa alta com entreletras positiva, seguindo a regra
+  tipografica de que quanto maior o texto, menor o tracking: 0,055 em na
+  capa, 0,07 em nos titulos de secao, 0,24 em nos rotulos pequenos.
+- Pesos reduzidos de 700/800 para 300/400 nas 24 declaracoes existentes.
+- Corpo de texto mantido em DM Sans, com entrelinha ampliada para 1,85.
+
+PALETA
+- Verde aprofundado, off-white quente e cinzas.
+- Laranja rebaixado de cor dominante a detalhe: nao preenche mais botao
+  algum, permanecendo em rotulos pequenos, fios e estado de hover.
+
+CAPA
+- Removido o gradiente que cobria metade da imagem; no lugar, uma vinheta
+  suave apenas onde o texto precisa de legibilidade. O video agora ocupa a
+  tela inteira, que era o efeito admirado no Capella.
+- Cabecalho transparente sobre a capa. Havia um defeito: a classe de estado
+  rolado vinha fixa no HTML e o script so a recalculava ao rolar, de modo
+  que o cabecalho nascia opaco. O calculo passou a ocorrer tambem no
+  carregamento.
+- Retirados os quatro itens com emoji, que destoavam do conjunto.
+- Duas pilulas deram lugar a um retangulo de fio fino e um link sublinhado.
+- Bolinhas de navegacao trocadas por fios finos; seta de rolagem discreta.
+
+SECOES
+- Espacamento vertical ampliado de 110 para 150 pixels.
+- Cartoes com sombra e cantos arredondados trocados por divisoes de fio
+  fino, no padrao editorial das referencias.
+- Raio de canto global reduzido de 28 para 2 pixels.
+
+ACESSIBILIDADE - correcao sobre as referencias
+As duas referencias reprovam no contraste minimo da norma WCAG AA: o cinza
+de corpo do Capella atinge 3,6:1 contra o minimo de 4,5:1 para texto
+pequeno. A formula foi adotada, o defeito nao:
+- Cinza de corpo escurecido para #646b69      -> 4,96:1
+- Laranja desdobrado em dois tons:
+    #96642c para fundo claro                  -> 4,60:1
+    #c0894e para fundo escuro                 -> 5,80:1
+- Varredura automatica em todas as paginas mediu cada texto contra o fundo
+  real e apontou tres falhas remanescentes, todas corrigidas: rotulo dos
+  modelos de casa, rotulo das paginas institucionais sobre fundo verde e o
+  texto "ERRO 404".
+- Um defeito proprio do redesign foi apanhado na mesma varredura: a regra
+  de cor dos titulos de secao havia pintado de verde tambem os titulos das
+  capas internas, que ficam sobre fotografia e precisam ser claros.
+
+TESTES APOS O REDESIGN
+- 9 paginas recarregadas com a Content-Security-Policy de producao:
+  nenhum erro de JavaScript, console, rede ou imagem quebrada.
+- Conferencia visual em 1440x900 e 390x844.
+- Contraste revarrido: nenhuma falha real restante. As ocorrencias ainda
+  sinalizadas sao texto claro sobre video ou fotografia, cujo fundo o
+  medidor nao consegue amostrar; conferidas uma a uma por recorte de
+  pixels.
+
+--------------------------------------------------------------------------------
+AMPLIACAO DE CONTEUDO E CORRECOES - 14/10/2026 (segunda rodada)
+--------------------------------------------------------------------------------
+
+PAGINA INICIAL AMPLIADA
+A home tinha quatro blocos e terminava cedo. Foram acrescentados tres,
+usando fotografias que ja existiam no pacote e so apareciam na galeria:
+- Faixa de declaracao: imagem de ponta a ponta com uma frase curta, o
+  mesmo recurso que o Capella usa para dar respiro entre blocos.
+- As quatro paisagens: lago, mata, jardins e convivio, cada um com foto,
+  numeracao e texto proprio, levando a galeria.
+- Quadro de numeros: area, lotes, lago e acesso, em fios finos.
+Altura da pagina: de cerca de 4.000 para 6.187 pixels.
+
+FICHA DO LOTE RECONSTRUIDA
+A janela que abria ao clicar em um lote tinha tres defeitos de layout,
+nao apenas de estilo:
+- O botao de fechar usava position:fixed com um calculo de viewport
+  fragil e aparecia solto no canto da tela, fora da janela.
+- A barra "video da construcao" era absolute sem contexto posicionado:
+  ancorava na janela inteira e atravessava a coluna de texto, estourando
+  a borda.
+- A coluna de conteudo nao rolava, de modo que os botoes do rodape
+  ficavam cortados.
+Alem disso, a imagem da ficha tinha carregamento adiado (lazy), o que a
+fazia aparecer pintada pela metade ao abrir; passou a carregar de
+imediato. As quatro especificacoes viraram linhas de fio fino, e os
+campos ainda em levantamento aparecem em estilo provisorio, para nao
+serem lidos como medida final.
+
+GALERIA: SOBREPOSICAO DE FOTOS CORRIGIDA
+A grade posicionava cada foto a mao, de .g1 ate .g28, em doze colunas.
+Havia dois conjuntos concorrentes de regras para .g1 ate .g10 e, no
+conjunto que prevalecia, quatro pares ocupavam a mesma celula:
+g3 com g5, g5 com g7, g8 com g10 e g8 com g11. Na pratica, quatro fotos
+ficavam sobrepostas a outras.
+Substituida por mosaico em colunas: cada foto mantem sua proporcao real,
+a sobreposicao deixa de ser possivel e novas fotos entram sem precisar
+calcular posicao. Verificacao automatica de sobreposicao entre as 28
+figuras: zero.
+
+ESTRUTURA: ICONES FORA DO PADRAO
+A grade de comodidades usava oito emojis coloridos, que destoavam da
+paleta sobria adotada no redesign. Substituidos por numeracao e fios
+finos, no mesmo padrao dos demais blocos do site.
+
+A ECOVILA
+A pagina era uma sequencia longa de texto entre a capa e a grade de
+valores. Recebeu a mesma faixa de declaracao da home, com outra foto.
+
+PESO DAS IMAGENS
+As fotografias estavam em resolucao muito acima da necessaria: varias em
+2047 pixels de largura para serem exibidas a 378. A largura real de
+exibicao de cada imagem foi medida em navegador, em tela larga e em
+celular, e cada arquivo foi reduzido para o dobro da maior exibicao,
+com piso de 1100 pixels para atender telas de alta densidade.
+- Galeria: de 22,3 MB para 12,7 MB.
+- Pacote completo: de 81,9 MB para 67,8 MB.
+- Comparacao 1:1 no caso mais exigente (detalhe floral denso): sem
+  diferenca perceptivel.
+
+SALTO DE LAYOUT ELIMINADO
+Com o mosaico, as imagens ainda nao carregadas passavam a ocupar altura
+zero e a pagina saltava conforme carregavam. As dimensoes reais de 69
+imagens foram declaradas no HTML, de modo que o navegador reserva o
+espaco antes do download. Medicao na galeria: altura antes de carregar
+7.887 pixels, depois 7.887 pixels, salto de zero.
+
+--------------------------------------------------------------------------------
+PENDENCIAS
+--------------------------------------------------------------------------------
+
+Bloqueiam funcionalidade (instrucoes no LEIA-ME-HOSPEDAGEM.txt, item 1):
+- Numero de WhatsApp.
+- Chave de acesso do Web3Forms.
+
+Pendencias de conteudo:
+- Enderecos oficiais de YouTube, Facebook, Instagram e Pinterest.
+- Medidas, areas e topografia finais dos lotes.
+- Modelos e videos individuais de construcao.
+
+Observacao: o dominio www.ecovilamundoverde.com.br foi confirmado como
+definitivo e esta aplicado em todas as URLs canonicas, no sitemap, no
+robots.txt, nos dados estruturados e no redirecionamento do .htaccess.
+
+================================================================================
