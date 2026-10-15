@@ -63,9 +63,10 @@ dizendo o que resolve. Para alterar algo, é mais seguro anexar uma camada nova
 do que editar regras antigas no meio do arquivo — as últimas declarações
 prevalecem sobre as anteriores de mesma especificidade.
 
-A camada `REDESIGN 2026` define o sistema visual atual: serifa leve em caixa
-alta com entreletras positiva, paleta quase monocromática e o laranja da
-logomarca reduzido a detalhe.
+A camada `REDESIGN 2026` define a base do sistema visual: paleta quase
+monocromática e o laranja da logomarca reduzido a detalhe. A camada
+`AJUSTE TIPOGRAFICO` é a mais recente e prevalece sobre ela: Playfair Display
+em caixa normal, com entreletras próxima de zero.
 
 ---
 

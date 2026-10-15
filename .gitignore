@@ -20,3 +20,6 @@ build/
 *.bak
 *.tmp
 *.log
+
+.vercel
+.env*

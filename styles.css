@@ -7,14 +7,14 @@
 .nav a[aria-current="page"]{color:var(--orange);opacity:1}.inner-page{padding-top:78px}.inner-page .site-header{background:rgba(13,44,40,.98);box-shadow:0 10px 30px rgba(0,0,0,.14)}
 .page-hero{min-height:590px;display:flex;align-items:flex-end;position:relative;color:#fff;background-image:linear-gradient(90deg,rgba(5,29,25,.9),rgba(5,29,25,.3)),var(--page-image);background-size:cover;background-position:center;padding:150px 0 82px}.page-hero.compact{min-height:490px}.page-hero .container{position:relative;z-index:2}.page-hero h1{font-family:var(--display);font-size:clamp(48px,6vw,78px);line-height:1;letter-spacing:-.045em;max-width:900px;margin:16px 0 20px}.page-hero p{font-size:20px;line-height:1.65;max-width:720px;color:rgba(255,255,255,.9)}
 .editorial-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:90px}.rich-copy{font-size:18px;line-height:1.85;color:#56635f}.rich-copy p:first-child{margin-top:0}.rich-copy .btn{margin-top:18px}.values-section{background:var(--cream)}.value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.value-grid article{background:#fff;border:1px solid #e8e5dc;border-radius:22px;padding:28px}.value-grid b{color:var(--orange);font-size:13px}.value-grid h3{font:400 22px var(--display);color:var(--green);margin:16px 0 10px}.value-grid p{color:var(--muted);line-height:1.65;margin:0}.image-story{background:#fff}
-.impact-grid article>b{display:block;font:300 18px var(--display);letter-spacing:.04em}.impact-grid article:nth-child(2)>b{font-size:27px}.impact-grid h3{margin-top:12px}
+.impact-grid article>b{display:block;font:400 18px var(--display);letter-spacing:.04em}.impact-grid article:nth-child(2)>b{font-size:27px}.impact-grid h3{margin-top:12px}
 .ecovila-photo-set{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:360px 230px;gap:12px}.ecovila-photo-set figure{margin:0;overflow:hidden;border:1px solid #ded9cd;border-radius:18px;background:var(--cream)}.ecovila-photo-set .ecovila-photo-main{grid-column:1/-1}.ecovila-photo-set img{width:100%;height:100%;object-fit:cover;filter:none;opacity:1}.ecovila-photo-set figure:first-child img{object-position:center 54%}
 .home-cta{background:#fff;padding-top:10px}.cta-panel{display:flex;align-items:center;justify-content:space-between;gap:40px;background:var(--green);color:#fff;border-radius:30px;padding:56px 62px}.cta-panel h2{color:#fff;max-width:760px}.cta-panel p{color:#c7d7d3;font-size:17px;line-height:1.7}.cta-panel .btn{flex:none}
 .feature-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.feature-cards article{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 16px 44px rgba(23,60,54,.08)}.feature-cards img{width:100%;height:300px;object-fit:cover}.feature-cards article>div{padding:25px}.feature-cards small{color:var(--orange);font-weight:900;letter-spacing:.16em}.feature-cards h3{font:400 25px var(--display);color:var(--green);margin:8px 0}.feature-cards p{color:var(--muted);line-height:1.65;margin:0}
 .contact-direct{margin:28px 0;padding:20px 0;border-top:1px solid #ddd7ca;border-bottom:1px solid #ddd7ca;display:flex;flex-direction:column;gap:5px}.contact-direct span{font-size:11px;font-weight:900;letter-spacing:.16em;color:var(--orange)}.contact-direct a{font:400 19px var(--display);color:var(--green);overflow-wrap:anywhere}.lead-form textarea{width:100%;border:1px solid #ccd7d1;border-radius:12px;padding:13px 14px;background:#fff;font:inherit;resize:vertical}.lead-form .wide{grid-column:1/3}
 .footer-expanded{grid-template-columns:1.25fr .72fr 1.15fr .78fr}.footer-brand-block{gap:14px!important}.footer-brand .footer-tagline{display:block;margin-top:5px;color:var(--mint)!important;font:500 13px/1.3 "DM Sans",sans-serif;letter-spacing:0}.footer-brand-block address{font-style:normal;font-size:13px;line-height:1.6;color:#9fb3ae}.footer-email{color:var(--orange)!important;font-weight:700;overflow-wrap:anywhere}.policy-links{display:grid!important;gap:10px!important}.policy-links a{position:relative;display:grid!important;gap:4px!important;padding:14px 38px 14px 14px;border:1px solid rgba(255,255,255,.12);border-radius:13px;background:rgba(255,255,255,.04);transition:.2s}.policy-links a:hover{background:rgba(255,255,255,.09);border-color:rgba(255,173,79,.45);transform:translateY(-1px)}.policy-links span{font-size:9px!important;letter-spacing:.13em;color:var(--orange)!important;font-weight:900}.policy-links b{font:400 13px var(--display);color:#fff}.policy-links i{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-style:normal;color:var(--orange);font-size:18px}.social-list{display:flex!important;flex-direction:column;gap:8px!important}.social-link{display:flex;align-items:center;gap:9px!important}.social-link b{width:25px;height:25px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:grid;place-items:center;color:var(--orange);font-size:12px;text-transform:uppercase}.footer-main small{font-size:11px;color:#718b85;line-height:1.5}
 .brand .brand-tagline,.footer-brand .brand-tagline{display:block;margin-top:5px;color:var(--mint)!important;font:500 13px/1.3 "DM Sans",sans-serif!important;letter-spacing:0;opacity:1}.visit-float{position:fixed;z-index:45;right:22px;bottom:22px;display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:999px;background:var(--orange);color:var(--green3);box-shadow:0 14px 38px rgba(5,28,25,.28);font-size:12px;font-weight:900;letter-spacing:.05em;transition:.2s}.visit-float:hover{transform:translateY(-3px);box-shadow:0 18px 42px rgba(5,28,25,.36)}
-.legal-hero{background:var(--green);color:#fff;padding:130px 0 68px}.legal-hero h1{font:300 clamp(44px,6vw,72px) var(--display);letter-spacing:-.04em;margin:12px 0}.legal-hero p{color:#adc3bd}.legal-section{padding-top:70px}.legal-copy{max-width:850px}.legal-copy h2{font:400 28px var(--display);color:var(--green);margin:38px 0 10px}.legal-copy p{font-size:17px;line-height:1.8;color:#586662}.legal-copy a{color:var(--green);font-weight:800;text-decoration:underline}
+.legal-hero{background:var(--green);color:#fff;padding:130px 0 68px}.legal-hero h1{font:400 clamp(44px,6vw,72px) var(--display);letter-spacing:-.04em;margin:12px 0}.legal-hero p{color:#adc3bd}.legal-section{padding-top:70px}.legal-copy{max-width:850px}.legal-copy h2{font:400 28px var(--display);color:var(--green);margin:38px 0 10px}.legal-copy p{font-size:17px;line-height:1.8;color:#586662}.legal-copy a{color:var(--green);font-weight:800;text-decoration:underline}
 @media(max-width:980px){.brand-copy{display:flex}.brand-copy strong{font-size:16px}.brand-copy span{font-size:11px}.editorial-grid{grid-template-columns:1fr;gap:28px}.value-grid{grid-template-columns:1fr 1fr}.feature-cards{grid-template-columns:1fr}.footer-expanded{grid-template-columns:1fr 1fr}.cta-panel{align-items:flex-start;flex-direction:column}}
 @media(max-width:620px){.brand{gap:6px}.brand img{width:50px;height:50px}.brand-copy strong{font-size:14px}.brand .brand-tagline,.footer-brand .brand-tagline{font-size:10px!important;max-width:150px}.visit-float{right:13px;bottom:13px;padding:12px 15px;font-size:10px}.page-hero{min-height:500px;padding:120px 0 58px}.page-hero.compact{min-height:440px}.page-hero h1{font-size:42px}.page-hero p{font-size:17px}.value-grid{grid-template-columns:1fr}.cta-panel{padding:36px 24px}.footer-expanded{grid-template-columns:1fr}.lead-form .wide{grid-column:auto}.feature-cards img{height:240px}.legal-hero{padding:110px 0 55px}}
 
@@ -52,13 +52,13 @@
 .gallery-grid img,.featured-photo-grid img{filter:none!important;opacity:1!important;mix-blend-mode:normal!important;isolation:isolate}.gallery-grid figure::before,.gallery-grid figure::after,.featured-photo-grid figure::before,.featured-photo-grid figure::after{content:none!important;display:none!important}.gallery-grid figure,.featured-photo-grid figure{background:transparent!important}
 
 /* Experiência premium dos lotes */
-.home-project-links{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}.lot-list-heading{margin-top:70px;text-align:center}.lot-list-heading h2{margin:10px 0 12px}.lot-list-heading p{max-width:720px;margin:0 auto;color:var(--muted);line-height:1.7}.lot-cards-premium{grid-template-columns:repeat(3,1fr);gap:22px}.lot-card-premium{padding:0;overflow:hidden}.lot-house-thumb{position:relative;height:215px;overflow:hidden;background:var(--green)}.lot-house-thumb img{width:100%;height:100%;object-fit:cover;transition:.45s}.lot-card-premium:hover .lot-house-thumb img{transform:scale(1.045)}.lot-number,.lot-expand{position:absolute;top:16px;display:grid;place-items:center;border-radius:50%;box-shadow:0 8px 22px rgba(0,0,0,.22)}.lot-number{left:16px;width:48px;height:48px;background:var(--orange);color:var(--green);font:300 15px var(--display)}.lot-expand{right:16px;width:38px;height:38px;background:rgba(255,255,255,.94);color:var(--green);font-size:18px}.lot-card-body{padding:22px}.lot-card-body>p{margin:14px 0}.lot-card-link{border:0;background:none;padding:16px 0 0;color:var(--green);font-size:11px;font-weight:900;letter-spacing:.04em;cursor:pointer}.lot-video-placeholder{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;display:grid;grid-template-columns:46px 1fr;column-gap:12px;align-items:center;padding:15px;border-radius:16px;background:rgba(10,37,34,.9);color:#fff;backdrop-filter:blur(8px)}.lot-video-placeholder span{grid-row:1/3;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:var(--green);padding-left:3px}.lot-video-placeholder strong{font-size:11px;letter-spacing:.08em}.lot-video-placeholder small{color:#b8cbc6}.lot-project-callout{display:flex;gap:14px;padding:18px;border-radius:18px;background:var(--green);color:#fff}.lot-project-callout>span{flex:0 0 44px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:var(--green);font-size:24px}.lot-project-callout small{display:block;color:var(--orange);font-size:9px;font-weight:900;letter-spacing:.12em}.lot-project-callout strong{display:block;margin:4px 0;font:400 17px var(--display)}.lot-project-callout p{margin:0;color:#b9cbc7;font-size:12px;line-height:1.5}
+.home-project-links{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}.lot-list-heading{margin-top:70px;text-align:center}.lot-list-heading h2{margin:10px 0 12px}.lot-list-heading p{max-width:720px;margin:0 auto;color:var(--muted);line-height:1.7}.lot-cards-premium{grid-template-columns:repeat(3,1fr);gap:22px}.lot-card-premium{padding:0;overflow:hidden}.lot-house-thumb{position:relative;height:215px;overflow:hidden;background:var(--green)}.lot-house-thumb img{width:100%;height:100%;object-fit:cover;transition:.45s}.lot-card-premium:hover .lot-house-thumb img{transform:scale(1.045)}.lot-number,.lot-expand{position:absolute;top:16px;display:grid;place-items:center;border-radius:50%;box-shadow:0 8px 22px rgba(0,0,0,.22)}.lot-number{left:16px;width:48px;height:48px;background:var(--orange);color:var(--green);font:400 15px var(--display)}.lot-expand{right:16px;width:38px;height:38px;background:rgba(255,255,255,.94);color:var(--green);font-size:18px}.lot-card-body{padding:22px}.lot-card-body>p{margin:14px 0}.lot-card-link{border:0;background:none;padding:16px 0 0;color:var(--green);font-size:11px;font-weight:900;letter-spacing:.04em;cursor:pointer}.lot-video-placeholder{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;display:grid;grid-template-columns:46px 1fr;column-gap:12px;align-items:center;padding:15px;border-radius:16px;background:rgba(10,37,34,.9);color:#fff;backdrop-filter:blur(8px)}.lot-video-placeholder span{grid-row:1/3;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:var(--green);padding-left:3px}.lot-video-placeholder strong{font-size:11px;letter-spacing:.08em}.lot-video-placeholder small{color:#b8cbc6}.lot-project-callout{display:flex;gap:14px;padding:18px;border-radius:18px;background:var(--green);color:#fff}.lot-project-callout>span{flex:0 0 44px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:var(--green);font-size:24px}.lot-project-callout small{display:block;color:var(--orange);font-size:9px;font-weight:900;letter-spacing:.12em}.lot-project-callout strong{display:block;margin:4px 0;font:400 17px var(--display)}.lot-project-callout p{margin:0;color:#b9cbc7;font-size:12px;line-height:1.5}
 .lots-base-image{overflow:hidden;border-radius:28px;background:#fff;box-shadow:var(--shadow)}.lots-base-image img{display:block;width:100%;height:auto;object-fit:contain;filter:none;opacity:1}
 @media(max-width:980px){.lot-cards-premium{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.lot-cards-premium{grid-template-columns:1fr}.lot-house-thumb{height:240px}.lot-map .p16{left:27%;top:40%}.lot-map .p17{left:46%;top:36%}.lot-map .p18{left:58%;top:51%}}
 .ecovila-photo-set{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:360px 230px;gap:12px}.ecovila-photo-set figure{margin:0;overflow:hidden;border:1px solid #ded9cd;border-radius:18px}.ecovila-photo-set .ecovila-photo-main{grid-column:1/-1}.ecovila-photo-set img{width:100%;height:100%;object-fit:cover;filter:none;opacity:1}
 @media(max-width:620px){.ecovila-photo-set{grid-template-columns:1fr;grid-template-rows:300px 220px 220px}.ecovila-photo-set .ecovila-photo-main{grid-column:auto}}
-.error-page{min-height:100vh;display:grid;place-content:center;justify-items:center;text-align:center;padding:40px;background:var(--cream)}.error-page img{width:140px;margin-bottom:24px}.error-page p{color:var(--orange);font-weight:900;letter-spacing:.18em}.error-page h1{font:300 clamp(38px,6vw,68px)/1.05 var(--display);color:var(--green);max-width:760px;margin:0 0 30px}
+.error-page{min-height:100vh;display:grid;place-content:center;justify-items:center;text-align:center;padding:40px;background:var(--cream)}.error-page img{width:140px;margin-bottom:24px}.error-page p{color:var(--orange);font-weight:900;letter-spacing:.18em}.error-page h1{font:400 clamp(38px,6vw,68px)/1.05 var(--display);color:var(--green);max-width:760px;margin:0 0 30px}
 
 /* ===================== PUBLICAÇÃO: WhatsApp, formulário e acessibilidade ==================== */
 [hidden]{display:none!important}
@@ -492,3 +492,56 @@ footer{background:var(--green3);padding:92px 0 26px}
    devolve a altura ao calculo proporcional. As regras que definem altura
    explicitamente tem especificidade maior e seguem valendo. */
 img{height:auto}
+
+/* ============================================================================
+   AJUSTE TIPOGRAFICO - 15/10/2026
+   Retorno do cliente: a caixa alta nao agradou e os numeros pareciam pequenos.
+   As duas queixas tinham a mesma origem. A Cormorant Garamond tem altura-x
+   baixa e tracado fino: no mesmo tamanho em pixels ela desenha menor que
+   qualquer das alternativas testadas. Trocada por Playfair Display, de letra
+   cheia e contraste alto, e retirada a caixa alta dos titulos.
+   ========================================================================== */
+
+:root{--display:"Playfair Display",Georgia,"Times New Roman",serif}
+
+/* --------------------------------------------------- fora a caixa alta
+   Mantida apenas nos rotulos minusculos e botoes, onde e padrao
+   tipografico e nao soa como grito. */
+h1,h2,h3,.display,
+.statement blockquote p,
+.amenity-grid strong,
+.brand-copy strong,.footer-brand strong,
+.brand .brand-tagline,.footer-brand .brand-tagline{text-transform:none}
+
+/* Entreletras: espacamento positivo largo existe para compensar a caixa alta.
+   Em caixa normal ele desmancha a palavra, entao volta para proximo de zero. */
+.hero h1{letter-spacing:-.015em;line-height:1.06}
+.section h2,.page-hero h1,.legal-hero h1{letter-spacing:-.01em;line-height:1.14}
+h3,.pillars h3,.lot-card h3,.value-grid h3,.lot-help h3,.lifestyle-card h3,
+.amenity-grid strong,.exp-tile-body h3{letter-spacing:0;font-weight:500}
+.modal-content h2{letter-spacing:-.01em}
+.statement blockquote p{letter-spacing:-.005em;line-height:1.26;max-width:22ch}
+.brand-copy strong,.footer-brand strong{letter-spacing:.01em;font-weight:500}
+.brand .brand-tagline,.footer-brand .brand-tagline{letter-spacing:.01em}
+
+/* A Playfair e mais pesada no desenho: pesos recuam um degrau para nao
+   engrossar o conjunto. */
+.hero h1,.section h2,.page-hero h1,.legal-hero h1,.modal-content h2,
+.statement blockquote p{font-weight:400}
+
+/* ------------------------------------------------------------- numeros
+   Queixa direta do cliente sobre o "18" e o "+25". A troca de fonte ja
+   resolve boa parte; o tamanho sobe mais um degrau e o peso tambem. */
+.figures-row b{font-size:clamp(44px,4.6vw,68px);font-weight:500;letter-spacing:-.015em}
+.figures-row span{font-size:14px;margin-top:16px}
+.lot-specs dd{font-size:18px;letter-spacing:0}
+.contact-direct a{letter-spacing:0}
+
+@media(max-width:620px){
+  .figures-row b{font-size:46px}
+  .hero h1{letter-spacing:-.01em}
+}
+
+/* A largura de 22ch vinha da caixa alta, que ocupa mais espaco por letra.
+   Em caixa normal a primeira linha cabia inteira e sobrava "cenario." sozinho. */
+.statement blockquote p{max-width:34ch}

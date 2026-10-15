@@ -277,6 +277,48 @@ espaco antes do download. Medicao na galeria: altura antes de carregar
 7.887 pixels, depois 7.887 pixels, salto de zero.
 
 --------------------------------------------------------------------------------
+AJUSTE TIPOGRAFICO - 15/10/2026
+--------------------------------------------------------------------------------
+
+Retorno do proprietario: a caixa alta nao agradou e os numeros 18 e 25
+pareciam pequenos.
+
+As duas queixas tinham a mesma origem. A Cormorant Garamond, adotada no
+redesign por se aproximar da fonte do Capella Ubud, tem altura-x baixa e
+tracado fino: no mesmo tamanho em pixels ela desenha menor que qualquer
+alternativa. Foi montado um comparativo com os textos reais do site em
+cinco fontes, todas no mesmo corpo, que tornou a diferenca evidente.
+
+Escolhida a Playfair Display, de letra cheia e contraste alto entre tracos
+grosso e fino.
+
+MUDANCAS
+- Fonte de titulo trocada nas 9 paginas.
+- Caixa alta retirada de titulos, frase de destaque, nome da marca, slogan
+  e itens da grade de comodidades. Mantida nos rotulos minusculos e botoes,
+  onde e padrao tipografico e nao soa como grito.
+- Entreletras revista: o espacamento positivo largo existe para compensar a
+  caixa alta e desmancha a palavra em caixa normal. Titulos passaram a
+  -0,015 em na capa e -0,01 em nas secoes.
+- Pesos: a Playfair comeca em 400. As quatro declaracoes em peso 300 foram
+  corrigidas, pois seriam sintetizadas pelo navegador com desenho inferior
+  ao da propria fonte.
+- Numeros do quadro da home: de 52 para 68 pixels e peso 500.
+- Largura da frase de destaque ajustada de 22 para 34 caracteres: a medida
+  anterior vinha da caixa alta e deixava "cenario." sozinho numa linha.
+
+CORRECAO NO PROPRIO TESTE
+A verificacao automatica de carregamento de fonte usava document.fonts.check(),
+que devolve verdadeiro mesmo quando a familia esta ausente, porque considera
+a fonte de reserva. Passou a procurar a familia entre as efetivamente
+carregadas. Antes da correcao o teste aprovava a fonte antiga, ja removida.
+
+TESTES
+- 9 paginas com a Content-Security-Policy de producao: zero erros.
+- Contraste: nenhuma falha nova.
+- Proporcao de imagens: nenhuma distorcida.
+
+--------------------------------------------------------------------------------
 PENDENCIAS
 --------------------------------------------------------------------------------
 
