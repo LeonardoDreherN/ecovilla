@@ -545,3 +545,8 @@ h3,.pillars h3,.lot-card h3,.value-grid h3,.lot-help h3,.lifestyle-card h3,
 /* A largura de 22ch vinha da caixa alta, que ocupa mais espaco por letra.
    Em caixa normal a primeira linha cabia inteira e sobrava "cenario." sozinho. */
 .statement blockquote p{max-width:34ch}
+
+/* Status do lote vindo do painel (só aparece quando o lote não está disponível) */
+.lot-status{margin-left:auto;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+.lot-status-reservado{background:#fbf0de;color:#8a5a1c}
+.lot-status-vendido{background:#f3e4e1;color:#8b2f22}

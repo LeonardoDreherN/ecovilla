@@ -9,27 +9,39 @@ framework: o que está no repositório é exatamente o que vai para o ar.
 
 ---
 
-## Dois campos a preencher
+## Painel administrativo (lotes e contatos)
 
-O site funciona sem isso, mas duas funções ficam desligadas até serem
-preenchidas. Tudo fica nas primeiras linhas de [`script.js`](script.js):
+Os **lotes** e os **contatos** são administrados no painel da Global Invest
+Brasil (`https://www.globalinvestbrasil.com/admin/`, aba **Ecovila**):
+
+- **Lotes:** o site busca a lista em `SITE.api + '/eco-lots'`. Alterar um lote no
+  painel (status, ficha, imagem, texto, visibilidade) muda o site na hora, sem
+  reenviar arquivos. Se o painel não responder, `script.js` usa a lista de
+  reserva embutida (`lotesReserva`), para a página nunca ficar vazia.
+- **Contatos:** o formulário de `contato.html` envia para `SITE.api + '/contacts'`
+  e o contato aparece em **Ecovila → Contatos** no painel.
+
+## Configuração
+
+Fica nas primeiras linhas de [`script.js`](script.js):
 
 ```js
 const SITE = {
   whatsapp: '',   // ex.: '5554999887766' — só dígitos, com país e DDD
-  web3forms: '',  // chave gratuita de https://web3forms.com
+  api: 'https://www.globalinvestbrasil.com/api',
   email: 'contato@ecovilamundoverde.com.br'
 };
 ```
 
-| Campo | Vazio | Preenchido |
-|---|---|---|
-| `whatsapp` | Os botões de WhatsApp ficam ocultos no site inteiro | Botão flutuante, rodapé e página de contato aparecem sozinhos |
-| `web3forms` | O formulário abre o aplicativo de e-mail do visitante | O formulário envia de verdade, sem sair da página |
+| Campo | Para que serve |
+|---|---|
+| `whatsapp` | Vazio: os botões de WhatsApp ficam ocultos. Preenchido: botão flutuante, rodapé e página de contato aparecem sozinhos |
+| `api` | Endereço do painel que fornece os lotes e recebe os contatos |
+| `email` | Exibido ao visitante se o envio do formulário falhar |
 
-Para obter a chave do Web3Forms: acesse web3forms.com, informe
-`contato@ecovilamundoverde.com.br`, confirme o e-mail e cole a chave recebida.
-O plano gratuito cobre 250 envios por mês.
+O domínio da API precisa estar liberado no `connect-src` da Content-Security-Policy
+(`vercel.json` e `.htaccess`). Do lado do painel, os domínios da Ecovila ficam em
+`ECO_ORIGINS` (`app/ecovila.php` do repositório GlobalInvest).
 
 ---
 
