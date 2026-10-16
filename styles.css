@@ -562,7 +562,11 @@ h3,.pillars h3,.lot-card h3,.value-grid h3,.lot-help h3,.lifestyle-card h3,
       e tamanhos em cqw, que leem a largura da propria moldura.
    ========================================================================== */
 
-.lot-aerial{margin:0}
+/* min-width:0 porque na pagina inicial o mapa e item de uma grade, e item
+   de grade nao encolhe abaixo do proprio conteudo por padrao: sem isto a
+   largura minima da moldura vaza e empurra a pagina inteira na horizontal. */
+.lot-aerial{margin:0;min-width:0}
+.lot-aerial-scroll{min-width:0}
 .lot-aerial-frame{position:relative;aspect-ratio:1600/738;container-type:inline-size;
   background:var(--green3);box-shadow:var(--shadow)}
 .lot-aerial-frame>img{display:block;width:100%;height:100%;object-fit:cover}

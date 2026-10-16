@@ -168,8 +168,13 @@ const POSICOES_MAPA = {
 /* Desenhado junto com os cartoes, e nao antes: assim o mapa mostra a lista
    que o painel devolveu. Lote retirado la nao ganha pino, e o reservado ou
    vendido chega ao mapa com o mesmo status do cartao, para os dois nunca
-   se contradizerem. */
+   se contradizerem.
+
+   O mesmo mapa aparece na pagina inicial, que nao tem a ficha. La o pino
+   vira link e leva para lotes.html ja com aquele lote aberto; onde a ficha
+   existe, ele e botao e abre a ficha ali mesmo. */
 const mapaPinos = document.querySelector('#lotMapPins');
+const temFicha = Boolean(document.querySelector('#lotModal'));
 function desenharMapa() {
   if (!mapaPinos) return;
   mapaPinos.innerHTML = lotes.map(l => {
@@ -177,24 +182,38 @@ function desenharMapa() {
     if (!posicao) return '';
     const indisponivel = Boolean(l.status && l.status !== 'disponivel');
     const rotulo = indisponivel ? `${l.title} — ${l.statusLabel}` : `Ver o ${l.title}`;
-    return `<button type="button" class="lot-pin-map" data-lot="${l.id}"`
+    const comum = `class="lot-pin-map"`
       + (indisponivel ? ' data-indisponivel' : '')
       + ` style="left:${posicao[0]}%;top:${posicao[1]}%"`
-      + ` aria-label="${esc(rotulo)}"><span>${esc(l.id)}</span></button>`;
+      + ` aria-label="${esc(rotulo)}"`;
+    const miolo = `<span>${esc(l.id)}</span>`;
+    return temFicha
+      ? `<button type="button" data-lot="${l.id}" ${comum}>${miolo}</button>`
+      : `<a href="lotes.html?lote=${l.id}" ${comum}>${miolo}</a>`;
   }).join('');
 }
 
-if (cards) {
-  cards.setAttribute('aria-busy', 'true');
+/* Chegando por "lotes.html?lote=3" - o caminho dos pinos da pagina inicial -
+   a ficha daquele lote abre sozinha, depois que a lista termina de carregar. */
+const loteDaRota = Number(new URLSearchParams(location.search).get('lote'));
+
+/* A pagina inicial tem o mapa mas nao a lista de cartoes, e mesmo assim
+   precisa dos lotes: e o painel que diz quais existem e quais ja sairam. */
+if (cards || mapaPinos) {
+  if (cards) cards.setAttribute('aria-busy', 'true');
   const limite = new AbortController();
   const timer = setTimeout(() => limite.abort(), 8000);
   fetch(`${SITE.api}/eco-lots`, { signal: limite.signal })
     .then(r => r.json())
     .then(dados => { if (dados.ok && Array.isArray(dados.lots)) lotes = dados.lots.map(completarImagem); })
     .catch(() => { /* painel fora do ar: segue com a lista de reserva */ })
-    .finally(() => { clearTimeout(timer); cards.removeAttribute('aria-busy'); desenharLotes(); desenharMapa(); });
-} else {
-  desenharMapa();
+    .finally(() => {
+      clearTimeout(timer);
+      if (cards) cards.removeAttribute('aria-busy');
+      desenharLotes();
+      desenharMapa();
+      if (loteDaRota > 0 && temFicha) openLot(loteDaRota);
+    });
 }
 
 const modal=document.querySelector('#lotModal');
