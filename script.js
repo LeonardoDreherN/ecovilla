@@ -43,6 +43,31 @@ const nav=document.querySelector('.nav');
 toggle?.addEventListener('click',()=>{nav?.classList.toggle('open');toggle.setAttribute('aria-expanded',nav?.classList.contains('open')?'true':'false')});
 nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
 
+/* ---------------------------------------------- imagens de cada lote
+   Sugestao de construcao para o lote, guardada no proprio site.
+
+   O painel e a fonte principal das imagens (ver o fetch mais abaixo). Esta
+   lista e a camada de baixo: vale para o lote que o painel nao respondeu
+   ou cadastrou sem imagem, no lugar da referencia generica.
+
+   recorte: true  -> render sem fundo (arquivo com transparencia). Precisa
+                     aparecer inteiro sobre o fundo do cartao, sem corte.
+   recorte: false -> fotografia real, preenche o quadro normalmente.
+
+   PARA ACRESCENTAR UM LOTE: salve a imagem em assets/lotes/ e inclua a
+   linha correspondente abaixo. Nada mais precisa ser alterado. */
+const IMAGENS_LOTES = {
+  1: { src: 'assets/lotes/lote-01.jpg',  recorte: false },
+  2: { src: 'assets/lotes/lote-02.jpg',  recorte: false },
+  3: { src: 'assets/lotes/lote-03.webp', recorte: true  },
+  4: { src: 'assets/lotes/lote-04.webp', recorte: true  },
+  5: { src: 'assets/lotes/lote-05.webp', recorte: true  },
+  6: { src: 'assets/lotes/lote-06.webp', recorte: true  }
+};
+
+// As duas referencias genericas, usadas enquanto o lote nao tem imagem sua.
+const IMAGENS_GENERICAS = ['assets/casa-frente.jpg', 'assets/casa-verde.jpg'];
+
 /* Lotes: vêm do painel administrativo (SITE.api + '/eco-lots'). A lista abaixo é
    só a reserva, usada se o painel não responder, para a página nunca ficar vazia. */
 const lotesReserva = Array.from({ length: 18 }, (_, indice) => {
@@ -64,7 +89,51 @@ const lotesReserva = Array.from({ length: 18 }, (_, indice) => {
     text: 'Um lote integrado à implantação de baixíssima densidade da Ecovila, planejado para valorizar privacidade, natureza e a relação com a paisagem.'
   };
 });
-let lotes = lotesReserva;
+
+/* Completa o lote com a imagem guardada no site, quando ele chega sem uma
+   propria. O painel tem a ultima palavra: so entra aqui o lote sem imagem
+   cadastrada, ou ainda com uma das duas referencias genericas.
+
+   propria marca que a imagem mostra a casa daquele lote, e nao um modelo
+   repetido; e o que muda o texto alternativo e o nome do modelo. */
+function completarImagem(lote) {
+  const semImagem = !lote.image || IMAGENS_GENERICAS.includes(lote.image);
+
+  // O painel cadastrou uma imagem para este lote: ela manda.
+  if (!semImagem) return { ...lote, propria: true, recorte: false };
+
+  const foto = IMAGENS_LOTES[lote.id];
+  if (foto) {
+    const generico = ['Casa Jardim', 'Casa Horizonte'].includes(lote.model && lote.model.valor);
+    return {
+      ...lote,
+      image: foto.src,
+      propria: true,
+      recorte: foto.recorte,
+      // O nome do modelo generico nao se aplica a quem tem imagem propria:
+      // a imagem e, ela mesma, a sugestao daquele lote.
+      model: generico ? { valor: 'Projeto específico deste lote', pendente: false } : lote.model
+    };
+  }
+
+  // Sem imagem no painel nem aqui: fica a referencia generica, para o cartao
+  // nunca aparecer com a imagem quebrada.
+  const par = lote.id % 2 === 0;
+  return {
+    ...lote,
+    image: lote.image || (par ? 'assets/casa-frente.jpg' : 'assets/casa-verde.jpg'),
+    propria: false,
+    recorte: false
+  };
+}
+
+let lotes = lotesReserva.map(completarImagem);
+
+/* Texto alternativo: so cita o modelo quando a imagem e a referencia
+   generica. Tendo imagem propria, ela mostra a casa daquele lote. */
+const legenda = l => l.propria
+  ? `Sugestão de construção para o ${l.title}`
+  : `Sugestão ${l.model.valor} para o ${l.title}`;
 
 const cards = document.querySelector('#lotCards');
 function desenharLotes() {
@@ -73,7 +142,45 @@ function desenharLotes() {
     const numero = String(l.id).padStart(2, '0');
     const status = l.status && l.status !== 'disponivel'
       ? `<span class="lot-status lot-status-${esc(l.status)}">${esc(l.statusLabel)}</span>` : '';
-    return `<article class="lot-card lot-card-premium" data-lot="${l.id}"><div class="lot-house-thumb"><img src="${esc(l.image)}" alt="Sugestão ${esc(l.model.valor)} para o ${esc(l.title)}" loading="lazy" decoding="async"><span class="lot-number">${numero}</span><span class="lot-expand">↗</span></div><div class="lot-card-body"><div class="lot-card-top"><h3>${esc(l.title)}</h3><span class="badge">VER DETALHES</span></div><p>${esc(l.location.valor)}</p><div class="lot-meta"><span>${esc(l.area.valor)}</span>${status}</div><button type="button" class="lot-card-link" data-lot="${l.id}">VER SUGESTÃO DE CONSTRUÇÃO →</button></div></article>`;
+    return `<article class="lot-card lot-card-premium" data-lot="${l.id}"><div class="lot-house-thumb"><img src="${esc(l.image)}" alt="${esc(legenda(l))}"${l.recorte ? ' data-recorte' : ''} loading="lazy" decoding="async"><span class="lot-number">${numero}</span><span class="lot-expand">↗</span></div><div class="lot-card-body"><div class="lot-card-top"><h3>${esc(l.title)}</h3><span class="badge">VER DETALHES</span></div><p>${esc(l.location.valor)}</p><div class="lot-meta"><span>${esc(l.area.valor)}</span>${status}</div><button type="button" class="lot-card-link" data-lot="${l.id}">VER SUGESTÃO DE CONSTRUÇÃO →</button></div></article>`;
+  }).join('');
+}
+
+/* ------------------------------------------ implantacao: mapa clicavel
+   Posicao de cada lote sobre assets/lotes/mapa-aereo.jpg, em porcentagem
+   da largura e da altura da imagem.
+
+   Os valores vieram dos proprios marcadores vermelhos do arquivo
+   original (1600 x 738 px), medidos no centro de cada numero. Como sao
+   porcentagens, valem em qualquer tamanho de tela.
+
+   ATENCAO: se o mapa for substituido por outra versao da foto aerea,
+   estas medidas precisam ser refeitas. */
+const POSICOES_MAPA = {
+   1: [45.00, 83.06],  2: [66.53, 27.64],  3: [47.91, 64.84],
+   4: [45.44, 50.95],  5: [48.53, 29.61],  6: [57.12, 12.53],
+   7: [85.31, 56.78],  8: [86.72, 47.02],  9: [86.38, 35.30],
+  10: [83.69, 27.64], 11: [62.16, 73.24], 12: [68.12, 72.70],
+  13: [72.19, 69.85], 14: [63.03, 84.35], 15: [69.78, 82.99],
+  16: [74.75, 80.22], 17: [77.19, 77.57], 18: [79.41, 83.47]
+};
+
+/* Desenhado junto com os cartoes, e nao antes: assim o mapa mostra a lista
+   que o painel devolveu. Lote retirado la nao ganha pino, e o reservado ou
+   vendido chega ao mapa com o mesmo status do cartao, para os dois nunca
+   se contradizerem. */
+const mapaPinos = document.querySelector('#lotMapPins');
+function desenharMapa() {
+  if (!mapaPinos) return;
+  mapaPinos.innerHTML = lotes.map(l => {
+    const posicao = POSICOES_MAPA[l.id];
+    if (!posicao) return '';
+    const indisponivel = Boolean(l.status && l.status !== 'disponivel');
+    const rotulo = indisponivel ? `${l.title} — ${l.statusLabel}` : `Ver o ${l.title}`;
+    return `<button type="button" class="lot-pin-map" data-lot="${l.id}"`
+      + (indisponivel ? ' data-indisponivel' : '')
+      + ` style="left:${posicao[0]}%;top:${posicao[1]}%"`
+      + ` aria-label="${esc(rotulo)}"><span>${esc(l.id)}</span></button>`;
   }).join('');
 }
 
@@ -83,10 +190,13 @@ if (cards) {
   const timer = setTimeout(() => limite.abort(), 8000);
   fetch(`${SITE.api}/eco-lots`, { signal: limite.signal })
     .then(r => r.json())
-    .then(dados => { if (dados.ok && Array.isArray(dados.lots)) lotes = dados.lots; })
+    .then(dados => { if (dados.ok && Array.isArray(dados.lots)) lotes = dados.lots.map(completarImagem); })
     .catch(() => { /* painel fora do ar: segue com a lista de reserva */ })
-    .finally(() => { clearTimeout(timer); cards.removeAttribute('aria-busy'); desenharLotes(); });
+    .finally(() => { clearTimeout(timer); cards.removeAttribute('aria-busy'); desenharLotes(); desenharMapa(); });
+} else {
+  desenharMapa();
 }
+
 const modal=document.querySelector('#lotModal');
 function preencher(seletor, campo) {
   const el = modal.querySelector(seletor);
@@ -100,7 +210,8 @@ function openLot(id) {
   if (!lote || !modal) return;
   const img = modal.querySelector('#modalImage');
   img.src = lote.image;
-  img.alt = `Sugestão ${lote.model.valor} para o ${lote.title}`;
+  img.alt = legenda(lote);
+  img.toggleAttribute('data-recorte', lote.recorte);
   modal.querySelector('#modalTitle').textContent = lote.title;
   modal.querySelector('#modalText').textContent = lote.text;
   preencher('#modalLocation', lote.location);

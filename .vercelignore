@@ -6,3 +6,6 @@ RELATORIO-TECNICO.txt
 # Configuracao de servidor Apache: sem efeito na Vercel, mantida no
 # repositorio caso o site volte para uma hospedagem compartilhada.
 .htaccess
+
+# Originais pesados dos lotes: as versoes publicadas estao em assets/lotes/.
+_originais-lotes/

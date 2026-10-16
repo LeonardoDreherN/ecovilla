@@ -23,3 +23,7 @@ build/
 
 .vercel
 .env*
+
+# Imagens originais dos lotes (arquivos grandes, fonte das versoes otimizadas
+# em assets/lotes/). Ficam so na maquina, nao vao para o repositorio.
+_originais-lotes/

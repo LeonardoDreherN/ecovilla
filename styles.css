@@ -101,8 +101,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .error-links a{font-size:13px;color:var(--muted);font-weight:600}
 .error-links a:hover{color:var(--green)}
 
-/* ============================================================================
-   REDESIGN 2026 - contencao editorial
+/* =====================================================================   REDESIGN 2026 - contencao editorial
    Referencias: Capella Ubud (serifa leve em caixa alta, video limpo) e
    Koto (tracking largo, paleta quase monocromatica, muito ar).
    Principio: a fotografia e a protagonista; o texto sussurra.
@@ -283,8 +282,7 @@ footer{background:var(--green3);padding:92px 0 26px}
 .page-hero p,.legal-hero p{color:rgba(255,255,255,.86)}
 .page-hero .eyebrow,.legal-hero .eyebrow{color:var(--orange)}
 
-/* ===================== Acessibilidade: contraste de texto =====================
-   O cinza e o laranja herdados das referencias reprovavam na norma WCAG AA
+/* ===================== Acessibilidade: contraste de texto ==============   O cinza e o laranja herdados das referencias reprovavam na norma WCAG AA
    (3,1:1 e 2,8:1 contra o minimo de 4,5:1 para texto pequeno).
    Cinza escurecido e laranja desdobrado em dois tons: um para fundo claro,
    outro para fundo escuro, onde o tom original ja passava com folga. */
@@ -311,8 +309,7 @@ footer{background:var(--green3);padding:92px 0 26px}
   .brand-copy strong{font-size:13px;letter-spacing:.1em}
 }
 
-/* ============================ FICHA DO LOTE =================================
-   A versao anterior tinha tres defeitos de layout, nao so de estilo:
+/* ============================ FICHA DO LOTE ==========================   A versao anterior tinha tres defeitos de layout, nao so de estilo:
    - o botao de fechar usava position:fixed com um calculo de viewport
      fragil, e aparecia solto no canto da tela, fora do modal;
    - a barra de video era absolute sem contexto posicionado, entao se
@@ -467,8 +464,7 @@ footer{background:var(--green3);padding:92px 0 26px}
 .amenity-grid small{font-size:13px;line-height:1.65}
 @media(max-width:620px){.amenity-grid a{padding:22px 0}}
 
-/* ========================= GALERIA: MOSAICO REAL ============================
-   A grade anterior posicionava cada foto a mao (.g1 ate .g28) em 12 colunas.
+/* ========================= GALERIA: MOSAICO REAL =====================   A grade anterior posicionava cada foto a mao (.g1 ate .g28) em 12 colunas.
    Havia dois conjuntos de regras concorrentes para .g1-.g10 e, no conjunto
    que prevalecia, quatro pares ocupavam a mesma celula: g3xg5, g5xg7,
    g8xg10 e g8xg11 - as fotos se sobrepunham na tela.
@@ -483,8 +479,7 @@ footer{background:var(--green3);padding:92px 0 26px}
 @media(max-width:980px){.gallery-grid{column-count:2}}
 @media(max-width:620px){.gallery-grid{column-count:1}}
 
-/* ===================== Correcao: proporcao das imagens =======================
-   Ao declarar width/height no HTML (para reservar espaco e evitar salto de
+/* ===================== Correcao: proporcao das imagens ================   Ao declarar width/height no HTML (para reservar espaco e evitar salto de
    layout), o atributo height passa a valer como altura literal. Onde o CSS
    define apenas a largura - logo do rodape, logo do cabecalho e a da pagina
    404 - a imagem era esticada ate a altura original do arquivo.
@@ -493,8 +488,7 @@ footer{background:var(--green3);padding:92px 0 26px}
    explicitamente tem especificidade maior e seguem valendo. */
 img{height:auto}
 
-/* ============================================================================
-   AJUSTE TIPOGRAFICO - 15/10/2026
+/* =====================================================================   AJUSTE TIPOGRAFICO - 15/10/2026
    Retorno do cliente: a caixa alta nao agradou e os numeros pareciam pequenos.
    As duas queixas tinham a mesma origem. A Cormorant Garamond tem altura-x
    baixa e tracado fino: no mesmo tamanho em pixels ela desenha menor que
@@ -550,3 +544,86 @@ h3,.pillars h3,.lot-card h3,.value-grid h3,.lot-help h3,.lifestyle-card h3,
 .lot-status{margin-left:auto;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
 .lot-status-reservado{background:#fbf0de;color:#8a5a1c}
 .lot-status-vendido{background:#f3e4e1;color:#8b2f22}
+/* ===================== IMPLANTACAO: MAPA AEREO CLICAVEL ==============   A foto aerea substitui a imagem estatica que havia aqui. Sobre ela os
+   18 lotes ganham um pino proprio, gerado pelo script.js a partir de
+   POSICOES_MAPA. Clicar no pino abre a mesma ficha dos cartoes.
+
+   Duas decisoes sustentam o resto das regras:
+
+   1. Os pinos sao posicionados em porcentagem, entao a moldura precisa
+      envolver a imagem exatamente. Dai o aspect-ratio fixo (o mesmo da
+      foto) em vez de altura automatica: alem de casar a moldura com a
+      imagem, reserva o espaco antes do download e evita o salto de
+      layout quando ela chega.
+
+   2. Os pinos tambem precisam encolher junto com a imagem. Medidas em
+      vw olhariam para a janela, nao para a moldura, e desandariam
+      dentro do container de 1180px. Por isso container-type:inline-size
+      e tamanhos em cqw, que leem a largura da propria moldura.
+   ========================================================================== */
+
+.lot-aerial{margin:0}
+.lot-aerial-frame{position:relative;aspect-ratio:1600/738;container-type:inline-size;
+  background:var(--green3);box-shadow:var(--shadow)}
+.lot-aerial-frame>img{display:block;width:100%;height:100%;object-fit:cover}
+.lot-aerial-pins{position:absolute;inset:0}
+
+/* O pino cobre o numero vermelho impresso na foto, que e pequeno demais e
+   se perde sobre a mata. O circulo claro devolve o contraste e, ao mesmo
+   tempo, avisa que aquilo ali e clicavel. */
+.lot-pin-map{position:absolute;transform:translate(-50%,-50%);
+  width:clamp(26px,2.5cqw,31px);height:clamp(26px,2.5cqw,31px);
+  display:grid;place-items:center;padding:0;cursor:pointer;
+  border:1px solid rgba(255,255,255,.92);border-radius:50%;
+  background:var(--orange);color:var(--green);
+  font-family:var(--sans);font-size:clamp(11px,1.05cqw,13px);font-weight:700;
+  line-height:1;letter-spacing:0;
+  box-shadow:0 0 0 2px rgba(8,22,20,.22),0 3px 12px rgba(5,18,16,.5);
+  transition:transform .2s,background .2s,box-shadow .2s}
+.lot-pin-map>span{display:block;transform:translateY(.5px)}
+
+/* Ao destacar um pino ele cresce; o z-index evita que um vizinho proximo
+   (os lotes 16 e 17 quase se tocam) fique por cima do que esta em foco. */
+.lot-pin-map:hover,.lot-pin-map:focus-visible{z-index:3;background:#fff;
+  transform:translate(-50%,-50%) scale(1.22);
+  box-shadow:0 0 0 2px rgba(8,22,20,.3),0 6px 18px rgba(5,18,16,.55)}
+.lot-pin-map:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+/* Lote reservado ou vendido: o cartao ja recebe um selo, entao o pino
+   recua para um tom neutro em vez de seguir com a cor de chamada. Continua
+   clicavel, porque a ficha ainda interessa a quem esta olhando. */
+.lot-pin-map[data-indisponivel]{background:#e8e6e0;color:#6c7370;
+  box-shadow:0 0 0 2px rgba(8,22,20,.18),0 3px 10px rgba(5,18,16,.4)}
+.lot-pin-map[data-indisponivel]:hover,
+.lot-pin-map[data-indisponivel]:focus-visible{background:#fff;color:var(--green)}
+
+/* Legenda da imagem */
+.lot-aerial-note{margin:16px 2px 0;font-family:var(--sans);font-size:12px;
+  line-height:1.6;color:var(--muted)}
+.lot-aerial-hint{display:none}
+
+/* Telas estreitas: reduzida a 360px de largura, a foto deixaria os pinos
+   dos lotes 11 a 18 empilhados uns sobre os outros. Em vez de encolher
+   tudo, a moldura mantem uma largura minima e o mapa passa a correr na
+   horizontal, com os alvos ainda tocaveis. */
+@media(max-width:1080px){
+  .lot-aerial-scroll{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain}
+  .lot-aerial-frame{min-width:1040px}
+  .lot-aerial-hint{display:block;margin-bottom:4px;color:var(--green);font-weight:500}
+  .lot-aerial-scroll::-webkit-scrollbar{height:6px}
+  .lot-aerial-scroll::-webkit-scrollbar-thumb{background:var(--line)}
+}
+
+/* ------------------------------------------- sugestoes de construcao
+   As imagens chegaram em dois formatos. As dos lotes 01 e 02 sao
+   fotografias e preenchem o quadro. As dos lotes 03 a 06 sao renders
+   recortados, sem fundo: cortar um deles para preencher decepa o
+   telhado, entao aparecem inteiros sobre o verde da marca, como numa
+   ficha de catalogo. O script marca essas com data-recorte. */
+.lot-house-thumb img[data-recorte]{object-fit:contain;padding:12px 14px;
+  background:radial-gradient(120% 105% at 50% 100%,var(--green2) 0%,var(--green3) 74%)}
+.modal-media img[data-recorte]{object-fit:contain;padding:30px 28px 46px;
+  background:radial-gradient(115% 95% at 50% 97%,var(--green2) 0%,var(--green3) 72%)}
+@media(max-width:860px){
+  .modal-media img[data-recorte]{padding:16px 16px 34px}
+}
