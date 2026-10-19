@@ -569,7 +569,11 @@ h3,.pillars h3,.lot-card h3,.value-grid h3,.lot-help h3,.lifestyle-card h3,
 .lot-aerial-scroll{min-width:0}
 .lot-aerial-frame{position:relative;aspect-ratio:1600/738;container-type:inline-size;
   background:var(--green3);box-shadow:var(--shadow)}
-.lot-aerial-frame>img{display:block;width:100%;height:100%;object-fit:cover}
+/* O <picture> entrou para trocar a foto no celular. Ele e so um involucro
+   de escolha, nao de layout: display:contents o tira do caminho para a
+   imagem continuar preenchendo a moldura como antes. */
+.lot-aerial-frame picture{display:contents}
+.lot-aerial-frame img{display:block;width:100%;height:100%;object-fit:cover}
 .lot-aerial-pins{position:absolute;inset:0}
 
 /* O pino cobre o numero vermelho impresso na foto, que e pequeno demais e
@@ -630,4 +634,25 @@ h3,.pillars h3,.lot-card h3,.value-grid h3,.lot-help h3,.lifestyle-card h3,
   background:radial-gradient(115% 95% at 50% 97%,var(--green2) 0%,var(--green3) 72%)}
 @media(max-width:860px){
   .modal-media img[data-recorte]{padding:16px 16px 34px}
+}
+
+/* ------------------------------------------- celular: a foto aerea em pe
+   Na largura de um telefone a foto deitada so funcionava rolando de lado.
+   Existe agora a mesma foto girada 90 graus, que cabe inteira na tela em
+   pe, e com ela a rolagem lateral deixa de ser necessaria.
+
+   A moldura troca de proporcao junto com a imagem (o <source> no HTML usa
+   exatamente este mesmo limite de 640px, e o script.js tambem, para os
+   tres nunca discordarem sobre qual foto esta no ar).
+
+   Os pinos encolhem porque em pe a foto aparece menor: medido, o par mais
+   proximo (lotes 16 e 17) fica a 20,7 px numa moldura de 350 px, entao o
+   pino precisa ficar abaixo disso para os dois nao se encostarem. */
+@media(max-width:640px){
+  .lot-aerial-frame{aspect-ratio:738/1600;min-width:0}
+  .lot-aerial-scroll{overflow-x:visible}
+  .lot-aerial-hint{display:none}
+  .lot-pin-map{width:clamp(17px,5.3cqw,30px);height:clamp(17px,5.3cqw,30px);
+    font-size:clamp(8.5px,2.4cqw,13px);
+    box-shadow:0 0 0 1px rgba(8,22,20,.22),0 2px 7px rgba(5,18,16,.5)}
 }

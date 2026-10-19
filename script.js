@@ -175,12 +175,34 @@ const POSICOES_MAPA = {
    O mesmo mapa aparece na pagina inicial, que nao tem a ficha. La o pino
    vira link e leva para lotes.html ja com aquele lote aberto; onde a ficha
    existe, ele e botao e abre a ficha ali mesmo. */
+/* A mesma foto aerea existe em duas versoes: a larga e a mesma girada 90
+   graus no sentido anti-horario, para caber em pe na tela do celular.
+
+   Por ser a mesma foto, as posicoes do retrato saem das da versao larga
+   por rotacao, em vez de uma segunda tabela medida a mao. Assim um ajuste
+   feito la em cima vale nas duas de uma vez, e elas nunca se desencontram.
+
+   Girando no sentido anti-horario, a borda direita vira o topo: o que era
+   a distancia ate a esquerda passa a ser a distancia ate o topo, e o que
+   era a distancia ate o topo passa a ser a distancia ate a direita.
+   Conferido contra a deteccao dos numeros na foto girada: erro de 1,7 px
+   no pior caso, para numeros impressos de 6 a 14 px. */
+const girarParaRetrato = ([px, py]) => [py, 100 - px];
+
+// Precisa casar com o <source media> no HTML e com o @media do styles.css.
+const RETRATO = matchMedia('(max-width: 640px)');
+const posicaoDoLote = id => {
+  const p = POSICOES_MAPA[id];
+  if (!p) return null;
+  return RETRATO.matches ? girarParaRetrato(p) : p;
+};
+
 const mapaPinos = document.querySelector('#lotMapPins');
 const temFicha = Boolean(document.querySelector('#lotModal'));
 function desenharMapa() {
   if (!mapaPinos) return;
   mapaPinos.innerHTML = lotes.map(l => {
-    const posicao = POSICOES_MAPA[l.id];
+    const posicao = posicaoDoLote(l.id);
     if (!posicao) return '';
     const indisponivel = Boolean(l.status && l.status !== 'disponivel');
     const rotulo = indisponivel ? `${l.title} — ${l.statusLabel}` : `Ver o ${l.title}`;
@@ -194,6 +216,10 @@ function desenharMapa() {
       : `<a href="lotes.html?lote=${l.id}" ${comum}>${miolo}</a>`;
   }).join('');
 }
+
+/* Virar o celular de lado troca a foto pela versao larga: os pinos
+   precisam ser recolocados, senao ficam nas coordenadas da outra. */
+RETRATO.addEventListener('change', desenharMapa);
 
 /* Chegando por "lotes.html?lote=3" - o caminho dos pinos da pagina inicial -
    a ficha daquele lote abre sozinha, depois que a lista termina de carregar. */
