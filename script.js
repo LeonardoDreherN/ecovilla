@@ -57,12 +57,24 @@ nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classLi
    PARA ACRESCENTAR UM LOTE: salve a imagem em assets/lotes/ e inclua a
    linha correspondente abaixo. Nada mais precisa ser alterado. */
 const IMAGENS_LOTES = {
-  1: { src: 'assets/lotes/lote-01.jpg',  recorte: false },
-  2: { src: 'assets/lotes/lote-02.jpg',  recorte: false },
-  3: { src: 'assets/lotes/lote-03.webp', recorte: true  },
-  4: { src: 'assets/lotes/lote-04.webp', recorte: true  },
-  5: { src: 'assets/lotes/lote-05.webp', recorte: true  },
-  6: { src: 'assets/lotes/lote-06.webp', recorte: true  }
+   1: { src: 'assets/lotes/lote-01.jpg', recorte: false },
+   2: { src: 'assets/lotes/lote-02.jpg', recorte: false },
+   3: { src: 'assets/lotes/lote-03.jpg', recorte: false },
+   4: { src: 'assets/lotes/lote-04.jpg', recorte: false },
+   5: { src: 'assets/lotes/lote-05.jpg', recorte: false },
+   6: { src: 'assets/lotes/lote-06.jpg', recorte: false },
+   7: { src: 'assets/lotes/lote-07.jpg', recorte: false },
+   8: { src: 'assets/lotes/lote-08.jpg', recorte: false },
+   9: { src: 'assets/lotes/lote-09.jpg', recorte: false },
+  10: { src: 'assets/lotes/lote-10.jpg', recorte: false },
+  11: { src: 'assets/lotes/lote-11.jpg', recorte: false },
+  12: { src: 'assets/lotes/lote-12.jpg', recorte: false },
+  13: { src: 'assets/lotes/lote-13.jpg', recorte: false },
+  14: { src: 'assets/lotes/lote-14.jpg', recorte: false },
+  15: { src: 'assets/lotes/lote-15.jpg', recorte: false },
+  16: { src: 'assets/lotes/lote-16.jpg', recorte: false },
+  17: { src: 'assets/lotes/lote-17.jpg', recorte: false },
+  18: { src: 'assets/lotes/lote-18.jpg', recorte: false }
 };
 
 // As duas referencias genericas, usadas enquanto o lote nao tem imagem sua.
