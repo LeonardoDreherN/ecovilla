@@ -157,7 +157,9 @@ function desenharLotes() {
    ATENCAO: se o mapa for substituido por outra versao da foto aerea,
    estas medidas precisam ser refeitas. */
 const POSICOES_MAPA = {
-   1: [45.00, 83.06],  2: [66.53, 27.64],  3: [47.91, 64.84],
+   // 1 e 2 trocados em relacao ao que estava impresso na foto aerea:
+   // o lote 1 e o de cima, perto do lago, e o 2 o de baixo.
+   1: [66.53, 27.64],  2: [45.00, 83.06],  3: [47.91, 64.84],
    4: [45.44, 50.95],  5: [48.53, 29.61],  6: [57.12, 12.53],
    7: [85.31, 56.78],  8: [86.72, 47.02],  9: [86.38, 35.30],
   10: [83.69, 27.64], 11: [62.16, 73.24], 12: [68.12, 72.70],
