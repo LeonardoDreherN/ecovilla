@@ -657,53 +657,54 @@ h3,.pillars h3,.lot-card h3,.value-grid h3,.lot-help h3,.lifestyle-card h3,
     box-shadow:0 0 0 1px rgba(8,22,20,.22),0 2px 7px rgba(5,18,16,.5)}
 }
 
-/* ===================== LAZER E BEM-ESTAR: CARTOES COM FOTO =============
-   A lista so de texto ficou apagada para a secao mais animada da pagina.
-   Cada item ganha a foto do lugar e uma cor por tipo de atividade: laranja
-   para esporte, azul para o lago, verde para a natureza e ambar para a
-   estrutura. A cor aparece na etiqueta e no degrade sobre a foto, que
-   tambem garante a leitura do texto branco. */
-.amenity-grid{--amenity:var(--orange);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:18px;border-top:0}
-.amenity-grid a{position:relative;display:flex;flex-direction:column;justify-content:flex-end;
-  min-height:0;aspect-ratio:4/5;padding:24px;border:0;border-radius:18px;overflow:hidden;
-  color:#fff;background:var(--green);
-  box-shadow:0 18px 40px rgba(11,28,25,.16);transition:transform .35s,box-shadow .35s}
-.amenity-grid .amenity-esporte{--amenity:#e8833a}
-.amenity-grid .amenity-lago{--amenity:#2d8fc4}
-.amenity-grid .amenity-natureza{--amenity:#3fa35b}
-.amenity-grid .amenity-estrutura{--amenity:#d9a62e}
-.amenity-grid img{position:absolute;inset:0;z-index:0;max-width:none;width:100%;height:100%;object-fit:cover;
-  transition:transform .6s}
-.amenity-grid a::after{content:"";position:absolute;inset:0;z-index:1;
-  background:linear-gradient(0deg,color-mix(in srgb,var(--amenity) 78%,#0b1c19) 0%,
-    color-mix(in srgb,var(--amenity) 38%,transparent) 42%,rgba(11,28,25,.08) 70%,rgba(11,28,25,.32) 100%)}
-.amenity-grid a:hover{transform:translateY(-6px);background:var(--green);
-  box-shadow:0 26px 52px color-mix(in srgb,var(--amenity) 38%,transparent)}
-.amenity-grid a:hover img{transform:scale(1.07)}
-.amenity-grid a:focus-visible{outline:3px solid var(--amenity);outline-offset:3px}
-.amenity-tag{position:absolute;top:18px;left:18px;padding:7px 12px;border-radius:999px;
-  background:var(--amenity);color:#fff;font:700 10px var(--sans);letter-spacing:.16em;
-  text-transform:uppercase;box-shadow:0 6px 16px rgba(0,0,0,.18)}
-.amenity-grid .amenity-icon{position:absolute;top:14px;right:18px;margin:0;color:#fff;
-  font:500 34px/1 var(--display);letter-spacing:0;text-shadow:0 2px 12px rgba(0,0,0,.35)}
-.amenity-grid strong,.amenity-grid a:hover strong{display:block;margin:0 0 6px;color:#fff;
-  font:500 25px/1.1 var(--display);letter-spacing:0;text-transform:none;
-  text-shadow:0 2px 14px rgba(0,0,0,.25)}
-.amenity-grid small{color:rgba(255,255,255,.9);font-size:13px;line-height:1.5}
-.amenity-grid strong,.amenity-grid small{position:relative;z-index:2}
-.amenity-tag,.amenity-grid .amenity-icon{z-index:2}
+/* ===================== LAZER E BEM-ESTAR: CARTOES COM ICONE ============
+   Cartoes claros, com icone de traco fino, numero e uma cor por tipo de
+   atividade: terracota para esporte, azul para a agua, verde para a
+   natureza, ocre para a vida no campo e petroleo para a estrutura.
+   A cor fica contida (fio no topo, fundo do icone e etiqueta) para manter
+   o tom sobrio do restante do site; no hover ela ganha corpo. */
+.amenities{background:linear-gradient(180deg,#fbfcf9 0%,var(--cream) 100%)}
+.amenity-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;border-top:0}
+.amenity{--c:#3c7d55;position:relative;display:flex;flex-direction:column;min-height:252px;
+  padding:30px 26px 28px;background:#fff;border:1px solid #e9e6df;border-radius:18px;
+  box-shadow:0 1px 2px rgba(11,28,25,.04),0 10px 30px rgba(11,28,25,.05);overflow:hidden;
+  transition:transform .35s,box-shadow .35s,border-color .35s}
+.amenity::before{content:"";position:absolute;top:0;left:26px;width:58px;height:3px;
+  border-radius:0 0 3px 3px;background:var(--c);transition:width .45s,left .45s}
+.amenity-campo{--c:#a37d2c}
+.amenity-esporte{--c:#bd6538}
+.amenity-agua{--c:#2a7398}
+.amenity-natureza{--c:#3c7d55}
+.amenity-estrutura{--c:#3f6a70}
+.amenity-num{position:absolute;top:24px;right:24px;font:500 13px/1 var(--sans);
+  letter-spacing:.08em;color:color-mix(in srgb,var(--c) 70%,#9aa09d)}
+.amenity-ico{display:grid;place-items:center;width:58px;height:58px;border-radius:17px;
+  color:#fff;background:linear-gradient(145deg,color-mix(in srgb,var(--c) 82%,#fff),var(--c));
+  box-shadow:0 10px 22px color-mix(in srgb,var(--c) 26%,transparent);
+  transition:transform .35s,box-shadow .35s}
+.amenity-ico svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+.amenity-tag{margin-top:auto;padding-top:26px;font:700 10px/1 var(--sans);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--c)}
+.amenity h3{margin:10px 0 8px;font:500 24px/1.12 var(--display);letter-spacing:0;color:var(--green)}
+.amenity p{margin:0;font-size:13.5px;line-height:1.6;color:var(--muted)}
+.amenity:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--c) 30%,#e9e6df);
+  box-shadow:0 2px 4px rgba(11,28,25,.04),0 22px 44px color-mix(in srgb,var(--c) 16%,transparent)}
+.amenity:hover::before{left:0;width:100%;border-radius:0}
+.amenity:hover .amenity-ico{transform:scale(1.06);box-shadow:0 14px 28px color-mix(in srgb,var(--c) 36%,transparent)}
 @media(max-width:980px){.amenity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){
   .amenity-grid{gap:12px}
-  .amenity-grid a{aspect-ratio:3/4;padding:16px;border-radius:14px}
-  .amenity-tag{top:12px;left:12px;padding:5px 9px;font-size:8.5px;letter-spacing:.12em}
-  .amenity-grid .amenity-icon{top:10px;right:12px;font-size:24px}
-  .amenity-grid strong,.amenity-grid a:hover strong{font-size:19px}
-  .amenity-grid small{font-size:12px;line-height:1.4}
+  .amenity{min-height:0;padding:22px 16px 20px;border-radius:14px}
+  .amenity::before{left:16px;width:46px}
+  .amenity-num{top:18px;right:16px;font-size:11px}
+  .amenity-ico{width:46px;height:46px;border-radius:14px}
+  .amenity-ico svg{width:24px;height:24px}
+  .amenity-tag{padding-top:20px;font-size:8.5px;letter-spacing:.14em}
+  .amenity h3{margin:8px 0 6px;font-size:19px}
+  .amenity p{font-size:12px;line-height:1.5}
 }
 @media(prefers-reduced-motion:reduce){
-  .amenity-grid a,.amenity-grid img{transition:none}
-  .amenity-grid a:hover{transform:none}
-  .amenity-grid a:hover img{transform:none}
+  .amenity,.amenity::before,.amenity-ico{transition:none}
+  .amenity:hover,.amenity:hover .amenity-ico{transform:none}
 }
