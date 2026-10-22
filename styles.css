@@ -676,6 +676,7 @@ h3,.pillars h3,.lot-card h3,.value-grid h3,.lot-help h3,.lifestyle-card h3,
 .amenity-agua{--c:#2a7398}
 .amenity-natureza{--c:#3c7d55}
 .amenity-estrutura{--c:#3f6a70}
+.amenity-ceu{--c:#6b5a9c}
 .amenity-num{position:absolute;top:24px;right:24px;font:500 13px/1 var(--sans);
   letter-spacing:.08em;color:color-mix(in srgb,var(--c) 70%,#9aa09d)}
 .amenity-ico{display:grid;place-items:center;width:58px;height:58px;border-radius:17px;
