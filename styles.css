@@ -658,54 +658,59 @@ h3,.pillars h3,.lot-card h3,.value-grid h3,.lot-help h3,.lifestyle-card h3,
 }
 
 /* ===================== LAZER E BEM-ESTAR: CARTOES COM ICONE ============
-   Cartoes claros, com icone de traco fino, numero e uma cor por tipo de
-   atividade: terracota para esporte, azul para a agua, verde para a
-   natureza, ocre para a vida no campo e petroleo para a estrutura.
-   A cor fica contida (fio no topo, fundo do icone e etiqueta) para manter
-   o tom sobrio do restante do site; no hover ela ganha corpo. */
+   Versao sobria, pedida pelo cliente a partir de uma referencia: cartao
+   branco, icone de traco fino na cor do texto, numero discreto num disco
+   palido e etiqueta em cinza. Nada de azulejo colorido nem fio no topo.
+
+   A cor por tipo de atividade (--c) nao sumiu: ela saiu do estado parado
+   e ficou so no hover, no fio do contorno e no halo da sombra. Em repouso
+   a grade inteira le como um bloco calmo; a categoria aparece quando a
+   pessoa aponta o cartao. Mantendo as variaveis, voltar atras e trocar
+   duas linhas, sem refazer a pesquisa de cor e contraste. */
 .amenities{background:linear-gradient(180deg,#fbfcf9 0%,var(--cream) 100%)}
 .amenity-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;border-top:0}
 .amenity{--c:#3c7d55;position:relative;display:flex;flex-direction:column;min-height:252px;
-  padding:30px 26px 28px;background:#fff;border:1px solid #e9e6df;border-radius:18px;
-  box-shadow:0 1px 2px rgba(11,28,25,.04),0 10px 30px rgba(11,28,25,.05);overflow:hidden;
+  padding:30px 26px 28px;background:#fff;border:1px solid #eceae4;border-radius:18px;
+  box-shadow:0 1px 2px rgba(11,28,25,.03),0 8px 24px rgba(11,28,25,.04);overflow:hidden;
   transition:transform .35s,box-shadow .35s,border-color .35s}
-.amenity::before{content:"";position:absolute;top:0;left:26px;width:58px;height:3px;
-  border-radius:0 0 3px 3px;background:var(--c);transition:width .45s,left .45s}
 .amenity-campo{--c:#a37d2c}
 .amenity-esporte{--c:#bd6538}
 .amenity-agua{--c:#2a7398}
 .amenity-natureza{--c:#3c7d55}
 .amenity-estrutura{--c:#3f6a70}
 .amenity-ceu{--c:#6b5a9c}
-.amenity-num{position:absolute;top:24px;right:24px;font:500 13px/1 var(--sans);
-  letter-spacing:.08em;color:color-mix(in srgb,var(--c) 70%,#9aa09d)}
-.amenity-ico{display:grid;place-items:center;width:58px;height:58px;border-radius:17px;
-  color:#fff;background:linear-gradient(145deg,color-mix(in srgb,var(--c) 82%,#fff),var(--c));
-  box-shadow:0 10px 22px color-mix(in srgb,var(--c) 26%,transparent);
-  transition:transform .35s,box-shadow .35s}
-.amenity-ico svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.6;
+
+/* Numero: disco palido no canto, como na referencia */
+.amenity-num{position:absolute;top:22px;right:22px;display:grid;place-items:center;
+  width:26px;height:26px;border-radius:50%;background:#f3f2ec;
+  font:500 10.5px/1 var(--sans);letter-spacing:.04em;color:#8d938f}
+
+/* Icone: so o traco, sem fundo nem sombra */
+.amenity-ico{display:block;color:var(--ink);transition:color .35s}
+.amenity-ico svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.5;
   stroke-linecap:round;stroke-linejoin:round}
-.amenity-tag{margin-top:auto;padding-top:26px;font:700 10px/1 var(--sans);letter-spacing:.18em;
-  text-transform:uppercase;color:var(--c)}
+
+.amenity-tag{margin-top:auto;padding-top:26px;font:600 10px/1 var(--sans);letter-spacing:.18em;
+  text-transform:uppercase;color:#9aa09d}
 .amenity h3{margin:10px 0 8px;font:500 24px/1.12 var(--display);letter-spacing:0;color:var(--green)}
 .amenity p{margin:0;font-size:13.5px;line-height:1.6;color:var(--muted)}
-.amenity:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--c) 30%,#e9e6df);
-  box-shadow:0 2px 4px rgba(11,28,25,.04),0 22px 44px color-mix(in srgb,var(--c) 16%,transparent)}
-.amenity:hover::before{left:0;width:100%;border-radius:0}
-.amenity:hover .amenity-ico{transform:scale(1.06);box-shadow:0 14px 28px color-mix(in srgb,var(--c) 36%,transparent)}
+
+/* No hover a categoria se revela, discreta: fio do contorno e halo */
+.amenity:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--c) 34%,#eceae4);
+  box-shadow:0 2px 4px rgba(11,28,25,.04),0 20px 40px color-mix(in srgb,var(--c) 14%,transparent)}
+.amenity:hover .amenity-ico{color:var(--c)}
+
 @media(max-width:980px){.amenity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){
   .amenity-grid{gap:12px}
   .amenity{min-height:0;padding:22px 16px 20px;border-radius:14px}
-  .amenity::before{left:16px;width:46px}
-  .amenity-num{top:18px;right:16px;font-size:11px}
-  .amenity-ico{width:46px;height:46px;border-radius:14px}
-  .amenity-ico svg{width:24px;height:24px}
+  .amenity-num{top:16px;right:14px;width:22px;height:22px;font-size:9.5px}
+  .amenity-ico svg{width:25px;height:25px}
   .amenity-tag{padding-top:20px;font-size:8.5px;letter-spacing:.14em}
   .amenity h3{margin:8px 0 6px;font-size:19px}
   .amenity p{font-size:12px;line-height:1.5}
 }
 @media(prefers-reduced-motion:reduce){
-  .amenity,.amenity::before,.amenity-ico{transition:none}
-  .amenity:hover,.amenity:hover .amenity-ico{transform:none}
+  .amenity,.amenity-ico{transition:none}
+  .amenity:hover{transform:none}
 }
