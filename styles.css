@@ -52,7 +52,7 @@
 .gallery-grid img,.featured-photo-grid img{filter:none!important;opacity:1!important;mix-blend-mode:normal!important;isolation:isolate}.gallery-grid figure::before,.gallery-grid figure::after,.featured-photo-grid figure::before,.featured-photo-grid figure::after{content:none!important;display:none!important}.gallery-grid figure,.featured-photo-grid figure{background:transparent!important}
 
 /* Experiência premium dos lotes */
-.home-project-links{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}.lot-list-heading{margin-top:70px;text-align:center}.lot-list-heading h2{margin:10px 0 12px}.lot-list-heading p{max-width:720px;margin:0 auto;color:var(--muted);line-height:1.7}.lot-cards-premium{grid-template-columns:repeat(3,1fr);gap:22px}.lot-card-premium{padding:0;overflow:hidden}.lot-house-thumb{position:relative;height:215px;overflow:hidden;background:var(--green)}.lot-house-thumb img{width:100%;height:100%;object-fit:cover;transition:.45s}.lot-card-premium:hover .lot-house-thumb img{transform:scale(1.045)}.lot-number,.lot-expand{position:absolute;top:16px;display:grid;place-items:center;border-radius:50%;box-shadow:0 8px 22px rgba(0,0,0,.22)}.lot-number{left:16px;width:48px;height:48px;background:var(--orange);color:var(--green);font:400 15px var(--display)}.lot-expand{right:16px;width:38px;height:38px;background:rgba(255,255,255,.94);color:var(--green);font-size:18px}.lot-card-body{padding:22px}.lot-card-body>p{margin:14px 0}.lot-card-link{border:0;background:none;padding:16px 0 0;color:var(--green);font-size:11px;font-weight:900;letter-spacing:.04em;cursor:pointer}.lot-video-placeholder{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;display:grid;grid-template-columns:46px 1fr;column-gap:12px;align-items:center;padding:15px;border-radius:16px;background:rgba(10,37,34,.9);color:#fff;backdrop-filter:blur(8px)}.lot-video-placeholder span{grid-row:1/3;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:var(--green);padding-left:3px}.lot-video-placeholder strong{font-size:11px;letter-spacing:.08em}.lot-video-placeholder small{color:#b8cbc6}.lot-project-callout{display:flex;gap:14px;padding:18px;border-radius:18px;background:var(--green);color:#fff}.lot-project-callout>span{flex:0 0 44px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:var(--green);font-size:24px}.lot-project-callout small{display:block;color:var(--orange);font-size:9px;font-weight:900;letter-spacing:.12em}.lot-project-callout strong{display:block;margin:4px 0;font:400 17px var(--display)}.lot-project-callout p{margin:0;color:#b9cbc7;font-size:12px;line-height:1.5}
+.home-project-links{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}.lot-list-heading{margin-top:48px;text-align:center}.lot-list-heading h2{margin:10px 0 12px}.lot-list-heading p{max-width:720px;margin:0 auto;color:var(--muted);line-height:1.7}.lot-cards-premium{grid-template-columns:repeat(3,1fr);gap:22px}.lot-card-premium{padding:0;overflow:hidden}.lot-house-thumb{position:relative;height:215px;overflow:hidden;background:var(--green)}.lot-house-thumb img{width:100%;height:100%;object-fit:cover;transition:.45s}.lot-card-premium:hover .lot-house-thumb img{transform:scale(1.045)}.lot-number,.lot-expand{position:absolute;top:16px;display:grid;place-items:center;border-radius:50%;box-shadow:0 8px 22px rgba(0,0,0,.22)}.lot-number{left:16px;width:48px;height:48px;background:var(--orange);color:var(--green);font:400 15px var(--display)}.lot-expand{right:16px;width:38px;height:38px;background:rgba(255,255,255,.94);color:var(--green);font-size:18px}.lot-card-body{padding:22px}.lot-card-body>p{margin:14px 0}.lot-card-link{border:0;background:none;padding:16px 0 0;color:var(--green);font-size:11px;font-weight:900;letter-spacing:.04em;cursor:pointer}.lot-video-placeholder{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;display:grid;grid-template-columns:46px 1fr;column-gap:12px;align-items:center;padding:15px;border-radius:16px;background:rgba(10,37,34,.9);color:#fff;backdrop-filter:blur(8px)}.lot-video-placeholder span{grid-row:1/3;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:var(--green);padding-left:3px}.lot-video-placeholder strong{font-size:11px;letter-spacing:.08em}.lot-video-placeholder small{color:#b8cbc6}.lot-project-callout{display:flex;gap:14px;padding:18px;border-radius:18px;background:var(--green);color:#fff}.lot-project-callout>span{flex:0 0 44px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:var(--green);font-size:24px}.lot-project-callout small{display:block;color:var(--orange);font-size:9px;font-weight:900;letter-spacing:.12em}.lot-project-callout strong{display:block;margin:4px 0;font:400 17px var(--display)}.lot-project-callout p{margin:0;color:#b9cbc7;font-size:12px;line-height:1.5}
 .lots-base-image{overflow:hidden;border-radius:28px;background:#fff;box-shadow:var(--shadow)}.lots-base-image img{display:block;width:100%;height:auto;object-fit:contain;filter:none;opacity:1}
 @media(max-width:980px){.lot-cards-premium{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.lot-cards-premium{grid-template-columns:1fr}.lot-house-thumb{height:240px}.lot-map .p16{left:27%;top:40%}.lot-map .p17{left:46%;top:36%}.lot-map .p18{left:58%;top:51%}}
@@ -192,11 +192,15 @@ p,.intro-copy,.rich-copy,.aerial-copy>p,.visit-copy p,.lot-card p,.pillars p,.va
 .hero-dots button.active{background:#fff}
 
 /* ------------------------------------------------------------------ secoes
-   Mais ar entre os blocos: o espaco e parte do acabamento. */
-.section{padding:150px 0}
+   O espaco e parte do acabamento, mas 150px em cima e 150px embaixo
+   somavam 300px de vazio entre uma secao e a seguinte - o suficiente
+   para o cliente ver os blocos como desgarrados uns dos outros, e nao
+   como um texto corrido. Recuado para 96px, o vao cai para 192px:
+   continua generoso, sem a sensacao de buraco. */
+.section{padding:96px 0}
 .intro-grid{gap:110px}
 .aerial-grid{gap:92px}
-.pillars{gap:0;margin-top:92px;border-top:1px solid var(--line)}
+.pillars{gap:0;margin-top:64px;border-top:1px solid var(--line)}
 .pillars article{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;
   padding:38px 34px 38px 0}
 .pillars article:hover{transform:none}
@@ -244,15 +248,15 @@ footer{background:var(--green3);padding:92px 0 26px}
 .lot-specs dd{font-family:var(--display);font-weight:400;letter-spacing:.05em;font-size:17px}
 
 @media(max-width:980px){
-  .section{padding:96px 0}
+  .section{padding:72px 0}
   .intro-grid,.aerial-grid{gap:46px}
   .cta-panel{padding:52px 34px}
-  .pillars{margin-top:54px}
+  .pillars{margin-top:40px}
   .hero-actions{flex-direction:column;align-items:flex-start;gap:4px}
   .hero-actions .btn-ghost{margin-left:0}
 }
 @media(max-width:620px){
-  .section{padding:74px 0}
+  .section{padding:56px 0}
   .hero h1{font-size:clamp(34px,10vw,46px);letter-spacing:.04em}
   .btn{padding:16px 26px}
   footer{padding:62px 0 22px}
